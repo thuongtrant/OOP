@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Bai1;
+package Bai1_2_3_4;
 
 /**
  *
@@ -44,19 +44,25 @@ public class DoanThang {
         public Diem timTrungDiem(){
             double hoangDo = (diemA.getX() + diemB.getX())/2;
             double tungDo = (diemA.getY() + diemB.getY())/2;
-            Diem trungDiem = new Diem(hoangDo,tungDo);
-            return trungDiem;
+            return new Diem(hoangDo,tungDo);
         }
         
- public boolean kiemTraSongSong(DoanThang doanThang) {
-        double hesoA = diemA.getY() - diemB.getY();
-        double hesoB = diemB.getX() - diemA.getX();
-        double hesoC = diemA.getX() * diemB.getY() - diemB.getX() * diemA.getY();
-
-        double hesoD = doanThang.diemA.getY() - doanThang.diemB.getY();
-        double hesoE = doanThang.diemB.getX() - doanThang.diemA.getX();
-        double hesoF = doanThang.diemA.getX() * doanThang.diemB.getX() - doanThang.diemB.getX() * doanThang.diemA.getX();
-
-        return (hesoA * hesoE == hesoB * hesoD) && (hesoB * hesoF == hesoC * hesoD);
-    }
+// public boolean kiemTraSongSong(DoanThang doanThang) {
+//        double hesoA = diemA.getY() - diemB.getY();
+//        double hesoB = diemB.getX() - diemA.getX();
+//        double hesoC = diemA.getX() * diemB.getY() - diemB.getX() * diemA.getY();
+//
+//        double hesoD = doanThang.diemA.getY() - doanThang.diemB.getY();
+//        double hesoE = doanThang.diemB.getX() - doanThang.diemA.getX();
+//        double hesoF = doanThang.diemA.getX() * doanThang.diemB.getX() - doanThang.diemB.getX() * doanThang.diemA.getX();
+//
+//        return (hesoA * hesoE == hesoB * hesoD) && (hesoB * hesoF == hesoC * hesoD);
+//    }
+        public boolean isSongSong(DoanThang d){
+            double v1 = (this.diemA.getX() - this.diemB.getX()) * 
+                    (d.getDiemA().getY() - d.getDiemB().getY());
+            double v2 = (this.diemA.getY() - this.diemB.getY()) *
+                    (d.getDiemA().getX() - d.getDiemB().getX());
+            return v1 == v2;
+        }
 }

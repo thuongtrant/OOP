@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Bai1;
+package Bai1_2_3_4;
 
 /**
  *
@@ -37,8 +37,7 @@ public class Diem {
         System.out.println("Diem{" + "x=" + x + ", y=" + y + '}');
     }
     public double tinhKhoangCach(Diem diem){
-        double khoangCach = Math.sqrt(Math.pow(this.x - diem.x, 2) + Math.pow(this.y - diem.y, 2));
-        return khoangCach;
+        return Math.sqrt(Math.pow(this.x - diem.x, 2) + Math.pow(this.y - diem.y, 2));
     }
     
 }
