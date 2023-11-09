@@ -100,6 +100,11 @@ public class HocVien {
     public void setDiemAnh(double diemAnh) {
         this.diemAnh = diemAnh;
     }
+
+    @Override
+    public String toString() {
+        return "HocVien{" + "maHV=" + maHV + ", hoTen=" + hoTen + ", ngaySinh=" + ngaySinh + ", queQuan=" + queQuan + ", diemToan=" + diemToan + ", diemVan=" + diemVan + ", diemAnh=" + diemAnh + '}';
+    }
     
     
 }
