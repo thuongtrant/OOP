@@ -20,14 +20,12 @@ public class HocVien {
     private double diemVan;
     private double diemAnh;
 
-    public HocVien(String hoTen, Date ngaySinh, String queQuan) {
+    public HocVien(String hoTen, String queQuan, Date ngaySinh) {
         dem++;
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
         this.queQuan = queQuan;
     }
-
-    
 
     public void nhapDiem(double diemToan, double diemVan, double diemAnh) {
         this.diemToan = diemToan;
