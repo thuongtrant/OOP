@@ -4,6 +4,8 @@
  */
 package Bai5_6;
 
+import java.util.Scanner;
+
 /**
  *
  * @author ttthu
@@ -15,8 +17,9 @@ public class PhanSo {
     private static int soPS = 0;
 
     public PhanSo() {
-        tuSo = 0;
-        mauSo = 1;
+//        tuSo = 0;
+//        mauSo = 1;
+        this(0, 1);
         soPS++;
     }
 
@@ -27,10 +30,28 @@ public class PhanSo {
     }
 
     public static int timUocSoChungLonNhat(int a, int b) {
-        if (b == 0) {
+//        if (b == 0) {
+//            return a;
+//        }
+//        return timUocSoChungLonNhat(b, a % b);
+            if(a == 0 || b == 0)
+                return 1;
+            a = Math.abs(a);
+            b = Math.abs(b);
+            while(a != b)
+                if(a > b)
+                    a -= b;
+                else
+                    b -= a;
             return a;
-        }
-        return timUocSoChungLonNhat(b, a % b);
+    }
+    
+    public void nhapPs(){
+        Scanner scan = new Scanner (System.in);
+        System.out.println("Tu so = ");
+        this.tuSo = scan.nextInt();
+        System.out.println("Mau so = ");
+        this.mauSo = scan.nextInt();
     }
 
     public int getTuSo() {
@@ -49,74 +70,40 @@ public class PhanSo {
         this.mauSo = mauSo;
     }
 
-    public void rutGon() {
+    public PhanSo rutGon() {
         int uocChung = timUocSoChungLonNhat(tuSo, mauSo);
-        tuSo /= uocChung;
-        mauSo /= uocChung;
+        return new PhanSo(tuSo /= uocChung, mauSo /= uocChung);
     }
     
     public PhanSo congPS(PhanSo p){
-        int mau = this.mauSo * p.mauSo;
-        int tu = this.tuSo*p.mauSo + this.mauSo*p.tuSo;
-        PhanSo kq = new PhanSo(tu,mau);
-        kq.rutGon();
-        return kq;
+        return new PhanSo(this.tuSo * p.mauSo + this.mauSo * p.tuSo, this.mauSo * p.mauSo).rutGon();
     }
     
     public PhanSo truPS(PhanSo p){
-        int mau = this.mauSo * p.mauSo;
-        int tu = this.tuSo*p.mauSo - this.mauSo*p.tuSo;
-        PhanSo kq = new PhanSo(tu,mau);
-        kq.rutGon();
-        return kq;
+        return new PhanSo(this.tuSo*p.mauSo - this.mauSo*p.tuSo, this.mauSo * p.mauSo).rutGon();
     }
     
     public PhanSo nhanPS(PhanSo p){
-        int tu = this.tuSo * p.tuSo;
-        int mau = this.mauSo *p.mauSo;
-        PhanSo kq = new PhanSo(tu,mau);
-        kq.rutGon();
-        return kq;
+        return new PhanSo(this.tuSo * p.tuSo, this.mauSo *p.mauSo).rutGon();
     }
     
     public PhanSo chiaPS(PhanSo p){
-        int tu = this.tuSo * p.mauSo;
-        int mau = this.mauSo * p.tuSo;
-        PhanSo kq = new PhanSo(tu,mau);
-        kq.rutGon();
-        return kq;
+        return new PhanSo(this.tuSo * p.mauSo, this.mauSo * p.tuSo).rutGon();
     }
     
-    public void soSanhPS(PhanSo p){
-        this.rutGon();
-        p.rutGon();
-        if(this.tuSo == p.tuSo && this.mauSo == p.mauSo)
-            System.out.println("Bang Nhau");
-        else if (this.tuSo * p.mauSo > this.mauSo * p.tuSo)
-            System.out.println("Lon hon");
-        else
-            System.out.println("Nho hon");
+    public int soSanhPS(PhanSo p){
+      double v1 = this.tuSo*1.0 / this.mauSo;
+      double v2 = p.tuSo*1.0 / p.mauSo;
+      if(v1 > v2)
+          return 1;
+      else if(v1 < v2)
+              return -1;
+      return 0;
+              
     }
-     public boolean equals(PhanSo ps) {
-        this.rutGon();
-        ps.rutGon();
-        return this.tuSo == ps.tuSo && this.mauSo == ps.mauSo;
-    }
-
-    public boolean lonHon(PhanSo ps) {
-        this.rutGon();
-        ps.rutGon();
-        return this.tuSo * ps.mauSo > this.mauSo * ps.tuSo;
-    }
-
-    public boolean nhoHon(PhanSo ps) {
-        this.rutGon();
-        ps.rutGon();
-        return this.tuSo * ps.mauSo < this.mauSo * ps.tuSo;
-    }
-    @Override
-    public String toString() {
-        return tuSo + "/" + mauSo;
+    
+    public void hienThiPS() {
+        System.out.println(tuSo + "/" + mauSo); 
     }
     
 }

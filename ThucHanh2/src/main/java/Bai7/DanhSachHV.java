@@ -35,16 +35,14 @@ public class DanhSachHV {
     public void hienThiDS(){
         for(HocVien hv : danhSachHV){
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            System.out.println("Ma hoc vien: " + hv.getMaHV()
-            + "Ho va ten: " + hv.getHoTen()
-            + "Que quan: " + hv.getQueQuan()
-            + "Ngay sinh: " + dateFormat.format(hv.getNgaySinh())
-            + "Diem toan: " + hv.getDiemToan()
-            + "Diem van: " + hv.getDiemVan()
-            + "Diem anh: " + hv.getDiemAnh()
-            + "Diem TB: " + hv.tinhDiemTB()
-            );
-            
+            System.out.println("Ma hoc vien: " + hv.getMaHV());
+            System.out.println("Ho va ten: " + hv.getHoTen());
+            System.out.println("Que quan: " + hv.getQueQuan());
+            System.out.println("Ngay sinh: " + dateFormat.format(hv.getNgaySinh()));
+            System.out.println("Diem toan: " + hv.getDiemToan());
+            System.out.println("Diem van: " + hv.getDiemVan());
+            System.out.println("Diem anh: " + hv.getDiemAnh());
+            System.out.println("Diem TB: " + hv.tinhDiemTB());
         }
     }
     
@@ -77,7 +75,7 @@ public class DanhSachHV {
     }
     
     public void dsDatHocBong() throws FileNotFoundException{
-        try(PrintWriter writer = new PrintWriter("hocbong.txt")){
+        try(PrintWriter writer = new PrintWriter("D:\\Users\\ttthu\\OneDrive\\Documents\\NetBeansProjects\\ThucHanh2\\src\\main\\java\\Bai7\\HocBong.txt")){
             for(HocVien hv : danhSachHV)
                 if(hv.tinhDiemTB() >= 8.0 && hv.getDiemToan() > 5 && hv.getDiemAnh() > 5 && hv.getDiemVan() > 5)
                     writer.println(hv.getMaHV() + " - " + hv.getHoTen() + " - " + hv.tinhDiemTB());
@@ -106,9 +104,9 @@ public class DanhSachHV {
             else
                 countAbove24++;
         
-            System.out.println("Số lượng học viên dưới 18 tuổi: " + coutUnder18);
-            System.out.println("Số lượng học viên từ 18 đến 23 tuổi: " + count18to23);
-            System.out.println("Số lượng học viên trên 24 tuổi: " + countAbove24);
+            System.out.println("So luong hoc vien duoi 18 tuoi: " + coutUnder18);
+            System.out.println("So luong hoc vien tu 18 den 23 tuoi:" + count18to23);
+            System.out.println("So luong hoc vien tren 24tuoi: " + countAbove24);
     }
 
         }

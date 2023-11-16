@@ -17,20 +17,22 @@ public class Main {
        
         System.out.println("Cac phan so trong mang");
         for(PhanSo ps : mangPhanSo)
-            System.out.println(ps);
+            ps.hienThiPS();
         
         PhanSo tong = new PhanSo();
         for(PhanSo ps : mangPhanSo)
             tong = tong.congPS(ps);
         
-        System.out.println("Tong cac phan so trong mang = " + tong);
+        System.out.println("Tong cac phan so trong mang = ");
+        tong.rutGon().hienThiPS();
         
         PhanSo maxPS = mangPhanSo[0];
-        for(PhanSo ps : mangPhanSo)
-            if(ps.lonHon(maxPS))
-                maxPS = ps;
+        for(int i = 1; i < mangPhanSo.length; i++)
+            if(maxPS.soSanhPS(mangPhanSo[i]) == -1)
+                maxPS = mangPhanSo[i];
         
-        System.out.println("Phan so lon nhat trong mang la: " + maxPS);
+        System.out.println("Phan so lon nhat trong mang la: ");
+        maxPS.hienThiPS();
                 
         
         
@@ -42,11 +44,14 @@ public class Main {
         System.out.println("Danh sach phan so");
         dsPhanSo.hienThiDanhSach();
         
-        System.out.println("Tong cac phan tu trong danh sach " + dsPhanSo.tinhTongPS());
+        System.out.println("Tong cac phan tu trong danh sach " );
+        dsPhanSo.tinhTongPS().hienThiPS();
         
-        System.out.println("Phan so lon nhat trong danh sach " + dsPhanSo.timMaxPS());
+        System.out.println("Phan so lon nhat trong danh sach ");
+        dsPhanSo.timMax().hienThiPS();
         
-        System.out.println("Phan so nho nhat trong danh sach " + dsPhanSo.timMinPS());
+        System.out.println("Phan so nho nhat trong danh sach ");
+        dsPhanSo.timMin().hienThiPS();
         
         dsPhanSo.sapXepDanhSach();
         System.out.println("Danh sach phan so sau khi sap xep");

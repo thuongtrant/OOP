@@ -6,17 +6,16 @@ package Bai5_6;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 /**
  *
  * @author ttthu
  */
 public class DsPhanSo {
-     private ArrayList<PhanSo> danhSachPhanSo;
+     private List<PhanSo> danhSachPhanSo = new ArrayList<>();
 
-     public DsPhanSo() {
-        danhSachPhanSo = new ArrayList<>();
-    }
 
     public void themPhanSo(PhanSo p){
         danhSachPhanSo.add(p);
@@ -24,7 +23,7 @@ public class DsPhanSo {
     
     public void hienThiDanhSach(){
         for(PhanSo ps : danhSachPhanSo)
-            System.out.println(ps);
+            ps.hienThiPS();   
     }
     
     public void xoaPhanSo(PhanSo p){
@@ -33,9 +32,15 @@ public class DsPhanSo {
     
     public void xoaPhanSo(int tuSo, int mauSo){
         PhanSo ps = new PhanSo(tuSo,mauSo);
-        danhSachPhanSo.remove(ps);
+        this.danhSachPhanSo.removeIf(p -> p.soSanhPS(ps) == 0);
     }
     
+    public PhanSo timMax(){
+        return this.danhSachPhanSo.stream().max((a,b) -> a.soSanhPS(b)).get();    
+    }
+    public PhanSo timMin(){
+        return this.danhSachPhanSo.stream().min((a,b) -> a.soSanhPS(b)).get();
+    }
     public PhanSo tinhTongPS(){
         PhanSo tong = new PhanSo();
         for(PhanSo ps: danhSachPhanSo)
@@ -45,29 +50,9 @@ public class DsPhanSo {
         return tong;
     }
     
-    public PhanSo timMaxPS(){
-        PhanSo maxPS = danhSachPhanSo.get(0);
-        for(PhanSo ps: danhSachPhanSo)
-            if(ps.lonHon(maxPS))
-                maxPS = ps;
-        
-        return maxPS;
-    }
-    
-      public PhanSo timMinPS(){
-        PhanSo minPS = danhSachPhanSo.get(0);
-        for(PhanSo ps: danhSachPhanSo)
-            if(ps.nhoHon(minPS))
-                minPS = ps;
-        
-        return minPS;
-    }
+  
       
      public void sapXepDanhSach() {
-        Collections.sort(danhSachPhanSo, (ps1, ps2) -> {
-            float value1 = (float) ps1.getTuSo() / ps1.getMauSo();
-            float value2 = (float) ps2.getTuSo() / ps2.getMauSo();
-            return Float.compare(value1, value2);
-        });
+    this.danhSachPhanSo.sort((a, b) -> a.soSanhPS(b));
     }
 }

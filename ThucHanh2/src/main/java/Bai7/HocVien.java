@@ -21,7 +21,7 @@ public class HocVien {
     private double diemAnh;
 
     public HocVien(String hoTen, String queQuan, Date ngaySinh) {
-        dem++;
+        this.maHV = dem++;
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
         this.queQuan = queQuan;
@@ -106,5 +106,5 @@ public class HocVien {
         return "HocVien{" + "maHV=" + maHV + ", hoTen=" + hoTen + ", ngaySinh=" + ngaySinh + ", queQuan=" + queQuan + ", diemToan=" + diemToan + ", diemVan=" + diemVan + ", diemAnh=" + diemAnh + '}';
     }
     
-    
+     
 }
