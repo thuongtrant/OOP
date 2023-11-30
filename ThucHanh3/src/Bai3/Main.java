@@ -4,6 +4,7 @@
  */
 package Bai3;
 
+import static Bai3.SanPham.scan;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +16,20 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+//        QuanLySanPham ql = new QuanLySanPham();
+//        try (Scanner scan = new Scanner(System.in)) {
+//            SanPham sp1 = new Sach();
+//            sp1.nhap();
+//            SanPham sp2 = new BangDia();
+//            sp2.nhap();
+//            ql.themSanPham(sp1);
+//            ql.themSanPham(sp2);
+//            ql.hienThi();
+//            VanPhongPham vp1 = new VanPhongPham();
+//            vp1.nhap();
+//            ql.themVanPhongPham(vp1);
+//        }
+
         Scanner scan = new Scanner(System.in);
         QuanLySanPham quanLySanPham = new QuanLySanPham();
 
@@ -29,67 +44,73 @@ public class Main {
             System.out.println("6. Xem danh sach san pham");
             System.out.println("7. Thoat");
             luaChon = scan.nextInt();
+            scan.nextLine();
             switch (luaChon) {
                 case 1:
-                    System.out.print("Nhập mã sản phẩm: ");
-                    String maSanPham = scan.next();
-                    System.out.print("Nhập tên sản phẩm: ");
-                    String tenSanPham = scan.next();
-                    System.out.print("Nhập mô tả sản phẩm: ");
-                    String moTaSanPham = scan.next();
-                    System.out.print("Nhập nhà sản xuất: ");
-                    String nhaSanXuat = scan.next();
-                    System.out.print("Nhập giá bán: ");
-                    double giaBan = scan.nextDouble();
 
-                    System.out.println("Chọn loại sản phẩm:");
-                    System.out.println("1. Sách");
-                    System.out.println("2. Băng đĩa");
-                    System.out.print("Nhập lựa chọn của bạn: ");
+                    System.out.println("Chon loai san pham:");
+                    System.out.println("1. Sach");
+                    System.out.println("2. Bang dia");
+                    System.out.print("Nhap lua chon cua ban: ");
                     int loaiSanPham = scan.nextInt();
                     SanPham sanPham;
                     if (loaiSanPham == 1) {
-                        System.out.print("Nhập số trang của sách: ");
-                        int soTrang = scan.nextInt();
-                        sanPham = new Sach(maSanPham, tenSanPham, moTaSanPham, nhaSanXuat, giaBan, soTrang);
+                        SanPham s = new Sach();
+                        s.nhap();
+                        quanLySanPham.themSanPham(s);
+                        System.out.println("San pham duoc them thanh cong.");
                     } else if (loaiSanPham == 2) {
-                        System.out.print("Nhập độ dài phát của băng đĩa: ");
-                        int doDaiPhat = scan.nextInt();
-                        sanPham = new BangDia(maSanPham, tenSanPham, moTaSanPham, nhaSanXuat, giaBan, doDaiPhat);
+                        SanPham b = new BangDia();
+                        b.nhap();
+                        quanLySanPham.themSanPham(b);
+                        System.out.println("San pham duoc them thanh cong.");
                     } else {
-                        System.out.println("Lựa chọn không hợp lệ. Không thể thêm sản phẩm.");
+                        System.out.println("Lua chon khong hop le. Vui long nhap lai");
                         continue;
                     }
 
-                    quanLySanPham.themSanPham(sanPham);
-                    System.out.println("Sản phẩm đã được thêm thành công.");
                     break;
 
                 case 2:
                     // Xoá sản phẩm
-                    System.out.print("Nhập mã sản phẩm hoặc tên sản phẩm cần xoá: ");
+                    System.out.print("Nhap ma san pham hoac ten san pham can xoa: ");
                     String tuKhoaXoa = scan.next();
                     quanLySanPham.xoaSanPham(tuKhoaXoa);
-                    System.out.println("Sản phẩm đã được xoá thành công.");
+                    System.out.println("San pham duoc xoa thanh cong.");
                     break;
                 case 3:
                     // Cập nhật sản phẩm
-                    System.out.print("Nhập mã sản phẩm cần cập nhật: ");
-                    String maSanPhamCapNhat = scan.next();
-                    System.out.print("Nhập tên mới: ");
-                    String tenMoi = scan.next();
-                    System.out.print("Nhập mô tả mới: ");
-                    String moTaMoi = scan.next();
-                    System.out.print("Nhập giá mới: ");
-                    double giaMoi = scan.nextDouble();
-                    quanLySanPham.capNhatSanPham(maSanPhamCapNhat, tenMoi, moTaMoi, giaMoi);
-                    System.out.println("Sản phẩm đã được cập nhật thành công.");
+                    System.out.println("");
+                    System.out.println("Ma: ");
+                    String maSanPham = scan.nextLine();
+                    System.out.println("Ten");
+                    String tenSanPham = scan.nextLine();
+                    System.out.println("Nha san xuat: ");
+                    String nhaSanXuat = scan.nextLine();
+                    System.out.println("Gia ban:");
+                    double giaSanPham = scan.nextDouble();
+                    quanLySanPham.capNhatSanPham(maSanPham, tenSanPham, nhaSanXuat, giaSanPham);
                     break;
-               
-                    
+                case 4:
+                     //Tìm kiếm sản phẩm
+                    System.out.print("Nhap tu khoa can tim kiem: ");
+                    String tuKhoa = scan.nextLine();
+                    quanLySanPham.timKiem(tuKhoa).forEach(h -> h.xuat());
+                    break;
+                case 5:
+                    // Sắp xếp sản phẩm
+                    quanLySanPham.sapXepSanPham();
+                    System.out.println("Danh sach san pham sau khi sap xep:");
+                    quanLySanPham.hienThi();
+                    break;
+                case 6:
+                    quanLySanPham.hienThi();
+                    break;
+                case 7:
+                    break;
                     
             }
-        }while(luaChon != 7);
+        } while (luaChon != 7);
     }
 
 }

@@ -8,30 +8,29 @@ package Bai3;
  *
  * @author ttthu
  */
-public class Sach extends SanPham {
-    private int soTrang;
+public class VanPhongPham extends SanPham{
 
-    public Sach() {
+    private String congDung;
+
+    public VanPhongPham() {
         super(null, null, null, null, 0);
     }
-
-    public Sach(String maSanPham, String tenSanPham, String moTaSanPham, String nhaSanXuat, double giaSanPham, int soTrang) {
-        super(maSanPham, tenSanPham, moTaSanPham, nhaSanXuat, giaSanPham);
-        this.soTrang = soTrang;
-    }
     
-    @Override
+    public VanPhongPham(String maSanPham, String tenSanPham, String moTaSanPham, String nhaSanXuat, double giaSanPham, String congDung) {
+        super(maSanPham, tenSanPham, moTaSanPham, nhaSanXuat, giaSanPham);
+        this.congDung = scan.nextLine();
+    }
+     @Override
      public void nhap(){
        super.nhap();
-        System.out.println("So trang: ");
-        String soTrang = scan.nextLine();
-        this.soTrang = Integer.parseInt(soTrang);
+        System.out.println("Cong dung: ");
+        String congDung = scan.nextLine();
     }
     
     @Override
     public void xuat(){
         super.xuat();
-        System.out.println("So trang: " + this.soTrang);
+        System.out.println("So trang: " + this.congDung);
     }
    
 }

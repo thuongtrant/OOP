@@ -11,13 +11,26 @@ package Bai3;
 public class BangDia extends SanPham{
     private int thoiGianPhat;
 
+    public BangDia() {
+        super(null, null, null, null, 0);
+    }
+
     public BangDia(String maSanPham, String tenSanPham, String moTaSanPham, String nhaSanXuat, double giaSanPham, int thoiGianPhat) {
         super(maSanPham, tenSanPham, moTaSanPham, nhaSanXuat, giaSanPham);
         this.thoiGianPhat = thoiGianPhat;
     }
     
+   @Override
+     public void nhap(){
+       super.nhap();
+        System.out.println("Thoi gian phat: ");
+        String thoiGianPhat = scan.nextLine();
+        this.thoiGianPhat = Integer.parseInt(thoiGianPhat);
+    }
+    
     @Override
-    public String toString(){
-        return super.toString() + "Thoi gian phat: " + thoiGianPhat;
+    public void xuat(){
+        super.xuat();
+        System.out.println("Thoi gian phat: " + this.thoiGianPhat);
     }
 }

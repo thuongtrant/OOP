@@ -4,11 +4,14 @@
  */
 package Bai3;
 
+import java.util.Scanner;
+
 /**
  *
  * @author ttthu
  */
 public class SanPham {
+    public static Scanner scan = new Scanner(System.in);
     private String maSanPham;
     private String tenSanPham;
     private String moTaSanPham;
@@ -23,6 +26,25 @@ public class SanPham {
         this.giaSanPham = giaSanPham;
     }
 
+    public void nhap(){
+        System.out.println("");
+        System.out.println("Ma: ");
+        this.maSanPham = scan.nextLine();
+        System.out.println("Ten");
+        this.tenSanPham = scan.nextLine();
+        System.out.println("Nha san xuat: ");
+        this.nhaSanXuat = scan.nextLine();
+        System.out.println("Gia ban:");
+        String giaSanPham = scan.nextLine();
+        this.giaSanPham = Double.parseDouble(giaSanPham);
+    }
+    
+    public void xuat(){
+        System.out.println("Ten: " + this.tenSanPham);
+        System.out.println("Ma: " + this.maSanPham);
+        System.out.println("Nha san xuat: " + this.nhaSanXuat);
+        System.out.println("Gia ban: " + this.giaSanPham);
+    }
     public String getMaSanPham() {
         return maSanPham;
     }
