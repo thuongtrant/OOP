@@ -5,24 +5,36 @@
 package Bai4;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author ttthu
  */
-enum KyHan{
-    MOT_TUAN,
-    MOT_THANG,
-    MOT_NAM
-}
 public class TaiKhoanKyHan extends TaiKhoan{
-    private LocalDate ngayDaoHan;
+    protected KyHan kyHan;
+    protected LocalDate ngayDaoHan;
 
-    public TaiKhoanKyHan(LocalDate ngayDaoHan, String tenTk, String soDt, String email, double soTien, LocalDate ngayTaoTk, KyHan kyHan) {
-        super(tenTk, soDt, email, soTien, ngayTaoTk);
-        
-        this.ngayDaoHan = ngayDaoHan;
+    public TaiKhoanKyHan(String tenTk, double soTien, KyHan kyHan) {
+        super(tenTk, soTien);
+        this.kyHan = kyHan;
+        this.ngayDaoHan = kyHan.tinhDaoHan(LocalDate.now());
     }
     
+    @Override
+    public double tinhLai(){
+        return this.kyHan.tinhLai(this.soTien);
+    }
     
+    @Override
+    public void capNhatDaoHan(){
+        this.ngayDaoHan = this.kyHan.tinhDaoHan(this.ngayDaoHan);
+    }
+    
+    @Override
+    public void hienThi(){
+        super.hienThi();
+        System.out.printf("Ky han: %s\nNgay dao han: %s\n",
+                this.kyHan, this.ngayDaoHan.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    }
 }

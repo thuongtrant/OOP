@@ -10,46 +10,57 @@ import java.time.LocalDate;
  *
  * @author ttthu
  */
-
-
 public class TaiKhoan {
-    public static int soTaiKhoan = 0;
+    public static int dem = 0;
     private String soTk;
     private String tenTk;
+    protected double soTien;
     private String soDt;
     private String email;
-    private double soTien;
     private LocalDate ngayTaoTk;
     private boolean trangThaiTk;
 
-    public TaiKhoan() {
+    {
+        this.soTk = String.format("%06d", dem++);
     }
-
-    public TaiKhoan(String tenTk, String soDt, String email, double soTien, LocalDate ngayTaoTk) {
-        this.soTk = String.format("%06d", ++soTaiKhoan);
+    public TaiKhoan(String tenTk, double soTien) {
         this.tenTk = tenTk;
-        this.soDt = soDt;
-        this.email = email;
         this.soTien = soTien;
-        this.ngayTaoTk = ngayTaoTk;
-        this.trangThaiTk = true; // true: tài khoản không kỳ hạn, false: tài khoản có kỳ hạn
+    }
+    public boolean isDaoHan(){
+        return true;
+    }
+   
+    public void rutTien(double st){
+        if(this.isDaoHan() && this.soTien >= st)
+            this.soTien -= st;
+    }
+     
+    public void nopTien(double st){
+        if(this.isDaoHan())
+            this.soTien += st;
+    }
+   
+    public double tinhLai(){
+        return (this.soTien * 0.0001) /12;
+    }
+    
+    public void capNhatDaoHan(){
+    
     }
 
     public void hienThi(){
-        System.out.println("So tai khoan: " + soTk);
-        System.out.println("Ten tai khoan: " + tenTk);
-        System.out.println("So tien: " + soTien);
-        System.out.println("Loai tai khoan: " );
+        System.out.printf("So tai khoan: %s\nTen tai khoan: %s\nSo tien: %.1f\n"
+                , this.soTk, this.tenTk, this.soTien);
+        System.out.println("Tien lai: " + this.tinhLai());
     }
 
-    
-    
-    public static int getSoTaiKhoan() {
-        return soTaiKhoan;
+    public static int getDem() {
+        return dem;
     }
 
-    public static void setSoTaiKhoan(int soTaiKhoan) {
-        TaiKhoan.soTaiKhoan = soTaiKhoan;
+    public static void setDem(int dem) {
+        TaiKhoan.dem = dem;
     }
 
     public String getSoTk() {
@@ -68,6 +79,14 @@ public class TaiKhoan {
         this.tenTk = tenTk;
     }
 
+    public double getSoTien() {
+        return soTien;
+    }
+
+    public void setSoTien(double soTien) {
+        this.soTien = soTien;
+    }
+
     public String getSoDt() {
         return soDt;
     }
@@ -82,14 +101,6 @@ public class TaiKhoan {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public double getSoTien() {
-        return soTien;
-    }
-
-    public void setSoTien(double soTien) {
-        this.soTien = soTien;
     }
 
     public LocalDate getNgayTaoTk() {
