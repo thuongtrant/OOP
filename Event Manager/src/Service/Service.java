@@ -12,30 +12,26 @@ import java.util.Scanner;
  */
 public abstract class Service {
 
-    
     private String name;
+    private int id;
     private double price;
-    Scanner sc = new Scanner(System.in);
-
-    public Service(String name, double price) {
+    
+    public Service(String name) {
         this.name = name;
-        this.price = price;
+    }
+    
+    public abstract double calculatePrice(); 
+    public void input(){
+    
     }
 
-    public Service() {
+    public void print(){
+        System.out.printf("Dich vu %s\nMa:%s\nGia: %.2f\n", this.getName(), this.getId(), this.calculatePrice());
     }
 
-    public void input() {
-        System.out.println("Ten: ");
-        this.name = sc.nextLine();
-        System.out.println("Gia: ");
-        this.price = sc.nextDouble();
-    }
-
-    public void print() {
-        
-        System.out.println("Ten: " + this.name);
-        System.out.println("Gia: " + this.price);
+    @Override
+    public String toString() {
+        return String.format("Dich vu %s\nMa:", this.getName(), this.getId());
     }
 
     public String getName() {
@@ -46,11 +42,16 @@ public abstract class Service {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
+    public int getId() {
+        return id;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setId(int id) {
+        this.id = id;
     }
+
+  
+
+  
+
 }

@@ -7,8 +7,12 @@ package Hall;
 import Hall.Time.TimeOfDay;
 import Hall.Time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-
+import Service.Configuration;
+import java.text.ParseException;
+import java.util.InputMismatchException;
+import java.util.zip.DataFormatException;
 /**
  *
  * @author ttthu
@@ -20,6 +24,7 @@ public class WeddingHall {
     private double price;
     private int floor;
     private int capacity;
+    private LocalDate dateRental;
     private DayOfWeek dayOfWeek;
     private TimeOfDay timeOfDay;
     private boolean isAvailable;
@@ -27,7 +32,7 @@ public class WeddingHall {
     public Scanner sc = new Scanner(System.in);
     
     {
-        id = String.format("S%03d", count++);
+        this.id = String.format("S%03d", count++);
     }
     
     public WeddingHall() {
@@ -41,29 +46,58 @@ public class WeddingHall {
         this.timeOfDay = timeOfDay;
     }
     
-    public void input(){
+    public void input()throws ParseException, DataFormatException {
         System.out.println("Ten: ");
         this.name = sc.nextLine();
+        System.out.println("Ngay thue (dd/mm/yyyy): ");
+        String dateRental = Configuration.sc.nextLine();
+        this.dateRental = LocalDate.parse(dateRental, DateTimeFormatter.ofPattern(Configuration.DATE_PATTER));
+        System.out.println("Enter day of week (MONDAY, TUESDAY, etc.): ");
+        this.dayOfWeek = DayOfWeek.valueOf(sc.nextLine().toUpperCase());
+        System.out.println("Enter time of day (MORNING, AFTERNOON, EVENING): ");
+        this.timeOfDay = TimeOfDay.valueOf(sc.nextLine().toUpperCase());
         System.out.println("Tang: ");
         this.floor = sc.nextInt();
         System.out.println("Suc chua: ");
         this.capacity = sc.nextInt();
-        System.out.println("Enter day of week (MONDAY, TUESDAY, etc.): ");
-        DayOfWeek dayOfWeek = DayOfWeek.valueOf(sc.nextLine().toUpperCase());
-        System.out.println("Enter time of day (MORNING, AFTERNOON, EVENING): ");
-        TimeOfDay timeOfDay = TimeOfDay.valueOf(sc.nextLine().toUpperCase());
+        
     }
-    private int calculateRentalPrice() {
+     private static LocalDate parseDate(String dateStr) throws InputMismatchException {
+        try {
+            return LocalDate.parse(dateStr, DateTimeFormatter.ofPattern(Configuration.DATE_PATTER));
+        } catch (Exception e) {
+            throw new InputMismatchException("Định dạng ngày không hợp lệ.");
+        }
+    }
+
+    private static DayOfWeek parseDayOfWeek(String dayOfWeekStr) throws InputMismatchException {
+        try {
+            return DayOfWeek.valueOf(dayOfWeekStr.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new InputMismatchException("Ngày trong tuần không hợp lệ.");
+        }
+    }
+
+    private static TimeOfDay parseTimeOfDay(String timeOfDayStr) throws InputMismatchException {
+        try {
+            return TimeOfDay.valueOf(timeOfDayStr.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new InputMismatchException("Thời điểm trong ngày không hợp lệ.");
+        }
+    }
+    public int calculateRentalPrice() {
         return dayOfWeek.getDayPrice() * timeOfDay.getTimePrice();
     }
+    
     public void print() {
         System.out.println("Ma: " + this.id);
         System.out.println("Ten: " + this.name);
-        System.out.println("Gia: " + calculateRentalPrice());
         System.out.println("Tang: " + this.floor);
         System.out.println("Suc chua: " + this.capacity);
+        System.out.printf("Ngay thue: = %s\n", this.dateRental.format(DateTimeFormatter.ofPattern(Configuration.DATE_PATTER)));
         System.out.println("Ngay thue: " + this.dayOfWeek);
         System.out.println("Buoi thue: " + this.timeOfDay);
+        System.out.println("Gia: " + calculateRentalPrice());
     }
 
     public String getName() {
@@ -129,6 +163,13 @@ public class WeddingHall {
     public void setCountRental(int countRental) {
         this.countRental = countRental;
     }
-    
+
+    public LocalDate getDateRental() {
+        return dateRental;
+    }
+
+    public void setDateRental(LocalDate dateRental) {
+        this.dateRental = dateRental;
+    }
     
 }

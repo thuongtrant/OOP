@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author ttthu
  */
 public class CauHinh {
-    public static final String DATE_PATTER ="dd/MM/yyyy";
     public static final Scanner sc = new Scanner(System.in);
+    public static final String DATE_PATTER = "dd/MM/yyyy";
     public static final int SO_MON = 3;
 }

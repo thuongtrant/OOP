@@ -6,10 +6,13 @@ package Hall;
 
 import Hall.Time.TimeOfDay;
 import Hall.Time.DayOfWeek;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
+import java.util.zip.DataFormatException;
 
 /**
  *
@@ -27,7 +30,7 @@ public class WeddingHallManagement {
        this.list.addAll(Arrays.asList(h));
    }
     
-    public void addHall(){
+    public void addHall() throws ParseException, DataFormatException{
         WeddingHall h = new WeddingHall();
         h.input();
         this.list.add(h);
@@ -62,5 +65,11 @@ public class WeddingHallManagement {
         return list.stream().filter(h -> h.getName().contains(kw)).collect(Collectors.toList());
     }
     
-   
+    public double priceRentalHall(){
+        return this.list.stream().flatMapToDouble(p -> DoubleStream.of(p.calculateRentalPrice())).sum();
+    }
+    
+    
+    // Sap xep danh sach giam dan theo so lan duoc thue
+    
 }

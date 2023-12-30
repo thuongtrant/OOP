@@ -6,7 +6,9 @@ package Hall;
 
 import Hall.Time.TimeOfDay;
 import Hall.Time.DayOfWeek;
+import java.text.ParseException;
 import java.util.Scanner;
+import java.util.zip.DataFormatException;
 /**
  *
  * @author ttthu
@@ -16,7 +18,7 @@ public class EventManager {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException, DataFormatException {
         // TODO code application logic here
         WeddingHall h1 = new WeddingHall("A", 1110, 2, DayOfWeek.MONDAY, TimeOfDay.MORNING);
         WeddingHall h2 = new WeddingHall("B", 2220, 5, DayOfWeek.TUESDAY, TimeOfDay.EVENING);
@@ -31,7 +33,10 @@ public class EventManager {
 //        System.out.println("Nhap ten sanh can xoa");
 //        String name = sc.nextLine();
 //        list.removeHall(name);
-        list.printList();
+       // list.printList();
+        WeddingHall h = new WeddingHall();
+        h.input();
+        h.print();
         
         
     }
