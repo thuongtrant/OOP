@@ -5,19 +5,22 @@
 package Service;
 
 import java.util.List;
+import java.util.InputMismatchException;
+import Control.Configuration;
 
 /**
  *
  * @author ttthu
  */
-public class ServiceSinger extends Service{
+public class ServiceSinger extends Service {
+
     private static int count = 0;
     private int id = count++;
     private String singerName;
     private int countSong;
     private final double price = 50;
 
-    public ServiceSinger(String singerName, int countSong, String name) {
+    public ServiceSinger(String singerName, int countSong) {
         super("Singer");
         this.singerName = singerName;
         this.countSong = countSong;
@@ -28,14 +31,21 @@ public class ServiceSinger extends Service{
     }
 
     @Override
-    public void input(){
+    public void input() {
         System.out.println("Ten: ");
         this.singerName = Configuration.sc.nextLine();
-        System.out.println("So bai: ");
-        this.countSong = Configuration.sc.nextInt();
+        try {
+
+            System.out.println("So bai: ");
+            this.countSong = Configuration.sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.err.println("Vui long nhap so!!!");
+
+        }
     }
+
     @Override
-    public void print(){
+    public void print() {
         super.print();
         System.out.println("Ca si: " + this.singerName);
         System.out.println("So bai: " + this.countSong);
@@ -69,5 +79,5 @@ public class ServiceSinger extends Service{
     public void setId(int id) {
         this.id = id;
     }
-    
+
 }

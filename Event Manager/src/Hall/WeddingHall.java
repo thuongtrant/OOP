@@ -4,20 +4,22 @@
  */
 package Hall;
 
-import Hall.Time.TimeOfDay;
-import Hall.Time.DayOfWeek;
+import Hall.Time.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import MyException.*;
 import java.util.Scanner;
-import Service.Configuration;
+import Control.Configuration;
 import java.text.ParseException;
 import java.util.InputMismatchException;
-import java.util.zip.DataFormatException;
+//import java.util.zip.DataFormatException;
+
 /**
  *
  * @author ttthu
  */
 public class WeddingHall {
+
     private static int count = 0;
     private String id;
     private String name;
@@ -27,68 +29,69 @@ public class WeddingHall {
     private LocalDate dateRental;
     private DayOfWeek dayOfWeek;
     private TimeOfDay timeOfDay;
-    private boolean isAvailable;
+    private boolean isAvailable = true;
     private int countRental;
-    public Scanner sc = new Scanner(System.in);
-    
+    private final String re = "\\d{2}/\\d{2}/\\d{4}";
+
     {
         this.id = String.format("S%03d", count++);
     }
-    
+
     public WeddingHall() {
     }
 
-    public WeddingHall(String name, int floor, int capacity, DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
+    public WeddingHall(String name, int floor, int capacity, String dateRental, DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
         this.name = name;
+        this.price = price;
         this.floor = floor;
         this.capacity = capacity;
+        this.dateRental = LocalDate.parse(dateRental, DateTimeFormatter.ofPattern(Configuration.DATE_PATTER));
         this.dayOfWeek = dayOfWeek;
         this.timeOfDay = timeOfDay;
     }
-    
-    public void input()throws ParseException, DataFormatException {
+
+    public void input() {
         System.out.println("Ten: ");
-        this.name = sc.nextLine();
-        System.out.println("Ngay thue (dd/mm/yyyy): ");
-        String dateRental = Configuration.sc.nextLine();
-        this.dateRental = LocalDate.parse(dateRental, DateTimeFormatter.ofPattern(Configuration.DATE_PATTER));
-        System.out.println("Enter day of week (MONDAY, TUESDAY, etc.): ");
-        this.dayOfWeek = DayOfWeek.valueOf(sc.nextLine().toUpperCase());
-        System.out.println("Enter time of day (MORNING, AFTERNOON, EVENING): ");
-        this.timeOfDay = TimeOfDay.valueOf(sc.nextLine().toUpperCase());
-        System.out.println("Tang: ");
-        this.floor = sc.nextInt();
-        System.out.println("Suc chua: ");
-        this.capacity = sc.nextInt();
-        
-    }
-     private static LocalDate parseDate(String dateStr) throws InputMismatchException {
-        try {
-            return LocalDate.parse(dateStr, DateTimeFormatter.ofPattern(Configuration.DATE_PATTER));
-        } catch (Exception e) {
-            throw new InputMismatchException("Định dạng ngày không hợp lệ.");
+        this.name = Configuration.sc.nextLine();
+        while (true) {
+            try {
+                System.out.println("Ngay thue (dd/mm/yyyy): ");
+                String dateRental = Configuration.sc.nextLine();
+                if (dateRental.matches(re)) {
+                    this.dateRental = LocalDate.parse(dateRental, DateTimeFormatter.ofPattern(Configuration.DATE_PATTER));
+                    break;
+                } else {
+                    throw new DateFormatException();
+                }
+            } catch (DateFormatException d) {
+            }
         }
+
+        try {
+            System.out.println("Enter day of week (MONDAY, TUESDAY, etc.): ");
+            this.dayOfWeek = DayOfWeek.valueOf(Configuration.sc.nextLine().toUpperCase());
+            System.out.println("Enter time of day (MORNING, AFTERNOON, EVENING): ");
+            this.timeOfDay = TimeOfDay.valueOf(Configuration.sc.nextLine().toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.err.println("Vui long nhap dung !!!");
+        }
+
+        try {
+            System.out.println("Tang: ");
+            this.floor = Configuration.sc.nextInt();
+            System.out.println("Suc chua: ");
+            this.capacity = Configuration.sc.nextInt();
+        } catch (InputMismatchException e) {
+            System.err.println("Vui long nhap so!!!");
+
+        }
+
     }
 
-    private static DayOfWeek parseDayOfWeek(String dayOfWeekStr) throws InputMismatchException {
-        try {
-            return DayOfWeek.valueOf(dayOfWeekStr.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new InputMismatchException("Ngày trong tuần không hợp lệ.");
-        }
-    }
-
-    private static TimeOfDay parseTimeOfDay(String timeOfDayStr) throws InputMismatchException {
-        try {
-            return TimeOfDay.valueOf(timeOfDayStr.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new InputMismatchException("Thời điểm trong ngày không hợp lệ.");
-        }
-    }
     public int calculateRentalPrice() {
         return dayOfWeek.getDayPrice() * timeOfDay.getTimePrice();
     }
-    
+
     public void print() {
         System.out.println("Ma: " + this.id);
         System.out.println("Ten: " + this.name);
@@ -98,6 +101,14 @@ public class WeddingHall {
         System.out.println("Ngay thue: " + this.dayOfWeek);
         System.out.println("Buoi thue: " + this.timeOfDay);
         System.out.println("Gia: " + calculateRentalPrice());
+    }
+
+    public void rent() {
+        isAvailable = false;
+    }
+
+    public void returnHall() {
+        isAvailable = true;
     }
 
     public String getName() {
@@ -171,5 +182,13 @@ public class WeddingHall {
     public void setDateRental(LocalDate dateRental) {
         this.dateRental = dateRental;
     }
-    
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

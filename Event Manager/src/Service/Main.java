@@ -22,12 +22,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ServiceManagement list = new ServiceManagement();
-        MenuManagement j = new MenuManagement();
-        WeddingHall h1 = new WeddingHall("A", 1110, 2, DayOfWeek.MONDAY, TimeOfDay.MORNING);
-        WeddingHall h2 = new WeddingHall("B", 2220, 5, DayOfWeek.TUESDAY, TimeOfDay.EVENING);
-        WeddingHall h3 = new WeddingHall("C", 3333, 2, DayOfWeek.SUNDAY, TimeOfDay.EVENING);
-        WeddingHallManagement listHall = new WeddingHallManagement();
+//        ServiceManagement list = new ServiceManagement();
+//        MenuManagement j = new MenuManagement();
+//        WeddingHall h1 = new WeddingHall("A", 1110, 2, DayOfWeek.MONDAY, TimeOfDay.MORNING);
+//        WeddingHall h2 = new WeddingHall("B", 2220, 5, DayOfWeek.TUESDAY, TimeOfDay.EVENING);
+//        WeddingHall h3 = new WeddingHall("C", 3333, 2, DayOfWeek.SUNDAY, TimeOfDay.EVENING);
+//        WeddingHallManagement listHall = new WeddingHallManagement();
         //  listHall.addHall(h1,h2,h3);
 //        list.addHall();
 //        Scanner sc = new Scanner(System.in);
@@ -89,17 +89,25 @@ public class Main {
 //        }
 //    }
 
-        Booking b = new Booking();
-        //b.input();
-        //b.print();
-         try {
-            b.input();
-        } catch (InputMismatchException | IllegalArgumentException e) {
-            System.out.println("WTF: " + e.getMessage());
-        }
-         b.print();
-         
-         
+//        Booking b = new Booking();
+//        //b.input();
+//        //b.print();
+//         try {
+//            b.input();
+//        } catch (InputMismatchException | IllegalArgumentException e) {
+//            System.out.println("WTF: " + e.getMessage());
+//        }
+//         b.print();
+//         
+        Service s = new ServiceKaraoke(3);
+        Service d = new ServiceDecoration();
+        Service k = new ServiceSinger("Lisa", 3);
+        ServiceManagement l = new ServiceManagement();
+        l.add(s, d, k);
+        l.printList();
+        l.upDate("Karaoke");
+        l.printList();
+
     }
 
 }

@@ -4,7 +4,7 @@
  */
 package Menu;
 
-import Service.Configuration;
+import Control.Configuration;
 
 /**
  *
@@ -13,6 +13,7 @@ import Service.Configuration;
 public abstract class MenuItem {
     protected String name;
     protected double price;
+    private int id;
 
     public MenuItem() {
     }
@@ -36,7 +37,7 @@ public abstract class MenuItem {
         System.out.println("Gia: " + this.calculatePrice());
     }
     
-     public abstract double calculatePrice(); 
+    public abstract double calculatePrice(); 
 
     public String getName() {
         return name;
@@ -52,6 +53,14 @@ public abstract class MenuItem {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
      
 }

@@ -4,8 +4,8 @@
  */
 package Menu;
 
-import Service.Configuration;
-import Service.MenuItem;
+import Control.Configuration;
+import Menu.MenuItem;
 
 /**
  *
@@ -27,6 +27,7 @@ public class Drink extends MenuItem {
 
     @Override
     public void input() {
+        System.out.println("Thuc uong ");
         super.input();
         System.out.println("Hang san xuat: ");
         this.manufacturer = Configuration.sc.nextLine();
@@ -42,6 +43,22 @@ public class Drink extends MenuItem {
     @Override
     public double calculatePrice() {
         return price;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
 }

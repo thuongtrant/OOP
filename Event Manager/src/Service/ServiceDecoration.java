@@ -10,13 +10,12 @@ package Service;
  */
 public class ServiceDecoration extends Service {
 
-    private int id = count ++;
     private static int count = 0;
     private final double price = 20;
+    private int id = count ++;
 
     public ServiceDecoration() {
         super("Decoration");
-        this.id = count++;
     }
 
     @Override

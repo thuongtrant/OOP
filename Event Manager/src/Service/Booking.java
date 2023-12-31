@@ -8,6 +8,8 @@ import Hall.WeddingHall;
 import Hall.WeddingHallManagement;
 import Menu.MenuManagement;
 import Service.ServiceManagement;
+import Control.Configuration;
+import Person.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class Booking {
 
     private String nameEvent;
     private WeddingHall hall;
+    private Customer customer;
     ServiceManagement listService = new ServiceManagement();
     MenuManagement listMenu = new MenuManagement();
     WeddingHallManagement listHall = new WeddingHallManagement();
@@ -30,15 +33,21 @@ public class Booking {
 
     public Booking() {
     }
-    
-    
+
     public void input() {
         System.out.println("Name event: ");
         this.nameEvent = Configuration.sc.nextLine();
-        System.out.println("Nhap thong tin sanh thue: ");
-        this.listHall.addHall();
-        this.listMenu.addMenu();
-        this.listService.addService();
+        hall = new WeddingHall();
+        if (hall.isIsAvailable()) {
+            hall.rent();
+            System.out.println("Nhap thong tin sanh thue: ");
+            this.listHall.add();
+        } else {
+            System.out.println("Sanh da duoc thue");
+        }
+
+        this.listMenu.add();
+        this.listService.add();
 
     }
 
@@ -48,14 +57,14 @@ public class Booking {
         listMenu.printList();
         listService.printList();
         System.out.println("Gia tong menu");
-        System.out.println(listMenu.priceMenu());
+        System.out.println(listMenu.priceSum());
         System.out.println("Gia tong dich vu");
-        System.out.println(listService.priceService());
+        System.out.println(listService.priceSum());
         System.out.println("Gia tong: " + totalRentalPrice());
     }
 
     public double totalRentalPrice() {
-        return listMenu.priceMenu() + listHall.priceRentalHall() + listService.priceService();
+        return listMenu.priceSum() + listHall.priceSum() + listService.priceSum();
     }
 
     public String getNameEvent() {
