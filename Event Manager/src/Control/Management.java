@@ -13,4 +13,6 @@ public interface Management {
     void remove(String kw);
     void upDate(String id);
     double priceSum();
+    void writeFile(String fileName);
+    void readFile(String fileName);
 }

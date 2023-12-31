@@ -5,12 +5,13 @@
 package Menu;
 
 import Control.Configuration;
+import java.io.Serializable;
 
 /**
  *
  * @author ttthu
  */
-public abstract class MenuItem {
+public abstract class MenuItem implements Serializable{
     protected String name;
     protected double price;
     private int id;

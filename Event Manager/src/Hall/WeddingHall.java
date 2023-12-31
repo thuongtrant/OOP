@@ -10,6 +10,8 @@ import java.time.format.DateTimeFormatter;
 import MyException.*;
 import java.util.Scanner;
 import Control.Configuration;
+import java.io.Serializable;
+import Control.IOFile;
 import java.text.ParseException;
 import java.util.InputMismatchException;
 //import java.util.zip.DataFormatException;
@@ -18,7 +20,7 @@ import java.util.InputMismatchException;
  *
  * @author ttthu
  */
-public class WeddingHall {
+public class WeddingHall implements Serializable{
 
     private static int count = 0;
     private String id;
@@ -88,7 +90,7 @@ public class WeddingHall {
 
     }
 
-    public int calculateRentalPrice() {
+    public double calculateRentalPrice() {
         return dayOfWeek.getDayPrice() * timeOfDay.getTimePrice();
     }
 
@@ -97,7 +99,7 @@ public class WeddingHall {
         System.out.println("Ten: " + this.name);
         System.out.println("Tang: " + this.floor);
         System.out.println("Suc chua: " + this.capacity);
-        System.out.printf("Ngay thue: = %s\n", this.dateRental.format(DateTimeFormatter.ofPattern(Configuration.DATE_PATTER)));
+        System.out.printf("Ngay thue: %s\n", this.dateRental.format(DateTimeFormatter.ofPattern(Configuration.DATE_PATTER)));
         System.out.println("Ngay thue: " + this.dayOfWeek);
         System.out.println("Buoi thue: " + this.timeOfDay);
         System.out.println("Gia: " + calculateRentalPrice());

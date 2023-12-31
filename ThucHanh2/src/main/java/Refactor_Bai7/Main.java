@@ -19,7 +19,7 @@ public class Main {
         ql.themHV(h1,h2);
         //ql.themHV();
         ql.docDsHv();
-        ql.nhapDiemDs();
+//        ql.nhapDiemDs();
         ql.hienThiDs();
         
         System.out.println("== SAP XEP ===");

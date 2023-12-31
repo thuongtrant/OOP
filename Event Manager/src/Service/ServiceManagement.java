@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Service;
+
 import Control.Configuration;
+import Control.IOFile;
 import Control.Management;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +17,7 @@ import java.util.stream.DoubleStream;
  *
  * @author ttthu
  */
-public class ServiceManagement implements Management{
+public class ServiceManagement implements Management {
 
     List<Service> list;
 
@@ -80,48 +82,47 @@ public class ServiceManagement implements Management{
         this.list.removeIf(s -> s.getName().equals(kw));
     }
 
-       // Tim kiem
+    // Tim kiem
     public List<Service> findMenu(String kw) {
         return list.stream().filter(h -> h.getName().contains(kw)).collect(Collectors.toList());
     }
-    
-    
+
     // Tinh tong dich vu
     @Override
     public double priceSum() {
         return this.list.stream().flatMapToDouble(p -> DoubleStream.of(p.calculatePrice())).sum();
     }
 
-      @Override
+    @Override
     public void upDate(String id) {
 //        int ID = Integer.parseInt(id);
-          Service existingService = findServiceById(id);
-        if(existingService != null){
+        Service existingService = findServiceById(id);
+        if (existingService != null) {
             System.out.println("Thong tin hien tai: ");
             existingService.print();
-            if(existingService instanceof ServiceKaraoke){
+            if (existingService instanceof ServiceKaraoke) {
                 ServiceKaraoke s = new ServiceKaraoke();
                 s.input();
                 existingService.setName(s.getName());
                 ((ServiceKaraoke) existingService).setTime(s.getTime());
-                
-            }else if(existingService instanceof ServiceDecoration){
+
+            } else if (existingService instanceof ServiceDecoration) {
                 ServiceDecoration d = new ServiceDecoration();
                 d.input();
                 existingService.setName(d.getName());
-            }else if(existingService instanceof ServiceSinger){
+            } else if (existingService instanceof ServiceSinger) {
                 ServiceSinger s = new ServiceSinger();
                 s.input();
                 existingService.setName(s.getName());
                 ((ServiceSinger) existingService).setSingerName(s.getSingerName());
                 ((ServiceSinger) existingService).setCountSong(s.getCountSong());
-            
+
             }
-            
-        }else {
+
+        } else {
             System.out.println("Khong tim thay !!!");
         }
-      
+
     }
 
     private Service findServiceById(String kw) {
@@ -131,6 +132,19 @@ public class ServiceManagement implements Management{
             }
         }
         return null;
+    }
+
+    @Override
+    public void writeFile(String fileName) {
+        IOFile.write(fileName, list);
+    }
+
+    @Override
+    public void readFile(String fileName) {
+        IOFile.read(fileName);
+        for (var obj : list) {
+            obj.print();
+        }
     }
 
 }

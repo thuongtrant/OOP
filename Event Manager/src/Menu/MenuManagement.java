@@ -10,6 +10,7 @@ package Menu;
  */
 import Control.Management;
 import Control.Configuration;
+import Control.IOFile;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -94,28 +95,28 @@ public class MenuManagement implements Management {
     public void upDate(String id) {
 //        int ID = Integer.parseInt(id);
         MenuItem existingMenu = findMenuById(id);
-        if(existingMenu != null){
+        if (existingMenu != null) {
             System.out.println("Thong tin hien tai: ");
             existingMenu.print();
-            if(existingMenu instanceof Food){
+            if (existingMenu instanceof Food) {
                 Food m = new Food();
                 m.input();
                 existingMenu.setName(m.getName());
                 existingMenu.setPrice(m.getPrice());
 //                ((Food) existingMenu).setIsVegetarian(m.isVegetarian());
-                
-            }else if(existingMenu instanceof Drink){
+
+            } else if (existingMenu instanceof Drink) {
                 Drink m = new Drink();
                 m.input();
                 existingMenu.setName(m.getName());
                 existingMenu.setPrice(m.getPrice());
                 ((Drink) existingMenu).setManufacturer(m.getManufacturer());
             }
-            
-        }else {
+
+        } else {
             System.out.println("Khong tim thay !!!");
         }
-      
+
     }
 
     private MenuItem findMenuById(String kw) {
@@ -127,14 +128,21 @@ public class MenuManagement implements Management {
         return null;
     }
 
-     // Tim kiem
+    // Tim kiem
     public List<MenuItem> findMenu(String kw) {
         return list.stream().filter(h -> h.getName().contains(kw)).collect(Collectors.toList());
     }
-    
-    
-//    @Override
-//    public void upDate(String id) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
+
+    @Override
+    public void writeFile(String fileName) {
+        IOFile.write(fileName, list);
+    }
+
+    @Override
+    public void readFile(String fileName) {
+        IOFile.read(fileName);
+        for (var obj : list) {
+            obj.print();
+        }
+    }
 }

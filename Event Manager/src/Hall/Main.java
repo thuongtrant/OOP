@@ -4,8 +4,10 @@
  */
 package Hall;
 
+import Control.IOFile;
 import Hall.Time.DayOfWeek;
 import Hall.Time.TimeOfDay;
+import java.io.FileNotFoundException;
 
 /**
  *
@@ -13,17 +15,22 @@ import Hall.Time.TimeOfDay;
  */
 public class Main {
 
-    public static void main(String[] args) {
-       WeddingHall w = new WeddingHall();
-       WeddingHall w1 = new WeddingHall("A", 20, 2, "22/12/2022", DayOfWeek.MONDAY, TimeOfDay.MORNING);
-       WeddingHall w2 = new WeddingHall("B", 10, 1, "11/11/2011", DayOfWeek.TUESDAY, TimeOfDay.AFTERNOON);
+    public static void main(String[] args) throws FileNotFoundException {
+        WeddingHall w = new WeddingHall();
+        WeddingHall w1 = new WeddingHall("A", 1, 1000, "22/12/2023", DayOfWeek.MONDAY, TimeOfDay.MORNING);
+        WeddingHall w2 = new WeddingHall("B", 2, 2000, "11/11/2023", DayOfWeek.TUESDAY, TimeOfDay.AFTERNOON);
+        WeddingHall w3 = new WeddingHall("C", 3, 3000, "11/10/2023", DayOfWeek.SUNDAY, TimeOfDay.EVENING);
 
         WeddingHallManagement list = new WeddingHallManagement();
-        list.add(w1,w2);
-        list.printList();
+        list.add(w1, w2,w3);
+//        list.printList();
 //        list.upDate("S001");
 //        list.printList();
-        System.out.println("tim");
-        list.findHall("A").forEach(h -> h.print());
+//        System.out.println("tim");
+//        list.findHall("A").forEach(h -> h.print());
+        list.writeFile("src/Hall/hall.txt");
+        list.readFile("src/Hall/hall.txt");
+
+     
     }
 }

@@ -7,10 +7,16 @@ package Hall;
 import Control.Management;
 import Hall.Time.*;
 import Control.Configuration;
+import Control.IOFile;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.zip.DataFormatException;
@@ -19,7 +25,7 @@ import java.util.zip.DataFormatException;
  *
  * @author ttthu
  */
-public class WeddingHallManagement implements Management {
+public class WeddingHallManagement implements Management{
 
     private List<WeddingHall> list;
 
@@ -54,15 +60,7 @@ public class WeddingHallManagement implements Management {
         this.list.removeIf(s -> s.getName().equals(kw));
     }
 
-    // Cap nhat 
-//    public void upDate(String name, int floor, int capacity, DayOfWeek dayOfWeek, TimeOfDay timeOfDay) {
-//        for (WeddingHall h : list) {
-//            if (h.getName().equals(name)) {
-//                h.print();
-//                h = new WeddingHall(name, floor, capacity, dayOfWeek, timeOfDay);
-//            }
-//        }
-//    }
+
     // Tim kiem
     public List<WeddingHall> findHall(String kw) {
         return list.stream().filter(h -> h.getName().contains(kw)).collect(Collectors.toList());
@@ -74,8 +72,8 @@ public class WeddingHallManagement implements Management {
     }
 
     // Sap xep danh sach giam dan theo so lan duoc thue
-   
-
+    
+    
     // Phương thức cập nhật thông tin sảnh cưới dựa trên id và người dùng nhập liệu mới từ bàn phím
     @Override
     public void upDate(String id) {
@@ -110,7 +108,33 @@ public class WeddingHallManagement implements Management {
         }
         return null;
     }
-
+  public void docDsHall() throws FileNotFoundException{
+        File f = new File("src/Hall/hall.txt");
+        try(Scanner scan = new Scanner(f)){
+            while(scan.hasNext()){
+                String id = scan.nextLine();
+                String name = scan.nextLine();
+                int floor = scan.nextInt();
+                int ca = scan.nextInt();
+                String date = scan.nextLine();
+                String day = scan.nextLine();
+                String timeofday = scan.nextLine();
+                double price = scan.nextDouble();
+                WeddingHall h = new WeddingHall();
+                this.list.add(h);
+            }
+        }
     
+    }
+    public void writeFile(String fileName) {
+        IOFile.write(fileName, list);
+        
+    }
 
+    public void readFile(String fileName) {
+        IOFile.read(fileName);
+        for(var obj : list){
+                obj.print();
+            }
+    }
 }
