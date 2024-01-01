@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -46,6 +47,8 @@ public class WeddingHallManagement implements Management {
         // Kiểm tra sảnh đã được thuê hay chưa
         if (list.contains(h)) {
             System.out.println("Sorry, the wedding hall is already rented.");
+            WeddingHall existingHall = list.get(list.indexOf(h));
+            existingHall.setCountRental(existingHall.getCountRental() + 1);
         } else {
             this.list.add(h);
         }
@@ -89,7 +92,6 @@ public class WeddingHallManagement implements Management {
         return this.list.stream().flatMapToDouble(p -> DoubleStream.of(p.calculateRentalPrice())).sum();
     }
 
-    // Sap xep danh sach giam dan theo so lan duoc thue
     // Cập nhật thông tin sảnh dựa trên id
     @Override
     public void upDate(String id) {
@@ -142,4 +144,18 @@ public class WeddingHallManagement implements Management {
         }
     }
 
+
+    // Sắp xếp danh sách giảm dần theo tần suất được thuê (xét theo tên sảnh)
+    public void sortHallByRentalCount() {
+        list.sort(Comparator.comparingInt(WeddingHall::getCountRental).reversed()
+                .thenComparing(WeddingHall::getName));
+    }
+
+    
+    // Phương thức tra cứu theo năm
+    public List<WeddingHall> findHallByYear(int year) {
+        return list.stream()
+                .filter(h -> h.getDateRental().getYear() == year)
+                .collect(Collectors.toList());
+    }
 }

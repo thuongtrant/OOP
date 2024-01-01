@@ -148,7 +148,7 @@ public class WeddingHall implements Serializable{
         return this.timeOfDay == other.timeOfDay;
     }
     
-    
+
     public String getName() {
         return name;
     }

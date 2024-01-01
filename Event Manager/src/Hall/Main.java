@@ -18,11 +18,12 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         WeddingHall w = new WeddingHall();
         WeddingHall w1 = new WeddingHall("A", 1, 1000, "22/12/2023", DayOfWeek.MONDAY, TimeOfDay.MORNING);
-        WeddingHall w2 = new WeddingHall("B", 2, 2000, "11/11/2023", DayOfWeek.TUESDAY, TimeOfDay.AFTERNOON);
+        WeddingHall w2 = new WeddingHall("B", 2, 2000, "11/11/2022", DayOfWeek.TUESDAY, TimeOfDay.AFTERNOON);
         WeddingHall w3 = new WeddingHall("C", 3, 3000, "11/10/2023", DayOfWeek.SUNDAY, TimeOfDay.EVENING);
+        WeddingHall w4 = new WeddingHall("A", 2, 1000, "22/12/2023", DayOfWeek.MONDAY, TimeOfDay.MORNING);
 
         WeddingHallManagement list = new WeddingHallManagement();
-        list.add(w1, w2, w3);
+        list.add(w1, w2, w3,w4);
 //        list.printList();
 //        list.upDate("S001");
 //        list.printList();
@@ -30,8 +31,21 @@ public class Main {
 //        list.findHall("A").forEach(h -> h.print());
 //        list.writeFile("src/Hall/hall.txt");
 //        list.readFile("src/Hall/hall.txt");
-        list.add();
-        list.printList();
+//        list.add();
+//        list.printList();
+//        System.out.println("Tra cuu theo nam");
+//        list.findHallByYear(2023).forEach(h -> h.print());
+ WeddingHallManagement hallManagement = new WeddingHallManagement();
+
+        // Thêm các sảnh
+        hallManagement.add(new WeddingHall("Hall1", 1, 100, "01/01/2022", DayOfWeek.MONDAY, TimeOfDay.MORNING));
+        hallManagement.add(new WeddingHall("Hall2", 2, 150, "02/01/2022", DayOfWeek.TUESDAY, TimeOfDay.AFTERNOON));
+        hallManagement.add(new WeddingHall("Hall1", 1, 100, "01/01/2022", DayOfWeek.MONDAY, TimeOfDay.MORNING));
+        hallManagement.add(new WeddingHall("Hall1", 3, 200, "04/01/2022", DayOfWeek.THURSDAY, TimeOfDay.MORNING));
+
+        // Sắp xếp danh sách và hiển thị
+        hallManagement.sortHallByRentalCount();
+        hallManagement.printList2();
 
     }
 }
