@@ -14,7 +14,6 @@ import java.io.Serializable;
 public abstract class MenuItem implements Serializable{
     protected String name;
     protected double price;
-    private int id;
 
     public MenuItem() {
     }
@@ -56,12 +55,6 @@ public abstract class MenuItem implements Serializable{
         this.price = price;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
      
 }

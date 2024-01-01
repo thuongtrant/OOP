@@ -38,13 +38,9 @@ public class Booking {
         System.out.println("Name event: ");
         this.nameEvent = Configuration.sc.nextLine();
         hall = new WeddingHall();
-        if (hall.isIsAvailable()) {
-            hall.rent();
-            System.out.println("Nhap thong tin sanh thue: ");
-            this.listHall.add();
-        } else {
-            System.out.println("Sanh da duoc thue");
-        }
+
+        System.out.println("Nhap thong tin sanh thue: ");
+        this.listHall.add();
 
         this.listMenu.add();
         this.listService.add();

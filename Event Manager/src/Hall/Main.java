@@ -22,15 +22,16 @@ public class Main {
         WeddingHall w3 = new WeddingHall("C", 3, 3000, "11/10/2023", DayOfWeek.SUNDAY, TimeOfDay.EVENING);
 
         WeddingHallManagement list = new WeddingHallManagement();
-        list.add(w1, w2,w3);
+        list.add(w1, w2, w3);
 //        list.printList();
 //        list.upDate("S001");
 //        list.printList();
 //        System.out.println("tim");
 //        list.findHall("A").forEach(h -> h.print());
-        list.writeFile("src/Hall/hall.txt");
-        list.readFile("src/Hall/hall.txt");
+//        list.writeFile("src/Hall/hall.txt");
+//        list.readFile("src/Hall/hall.txt");
+        list.add();
+        list.printList();
 
-     
     }
 }

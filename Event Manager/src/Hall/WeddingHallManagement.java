@@ -25,7 +25,7 @@ import java.util.zip.DataFormatException;
  *
  * @author ttthu
  */
-public class WeddingHallManagement implements Management{
+public class WeddingHallManagement implements Management {
 
     private List<WeddingHall> list;
 
@@ -33,24 +33,32 @@ public class WeddingHallManagement implements Management{
         list = new ArrayList<>();
     }
 
-    // Them 
+    // Thêm nhiều sảnh 
     public void add(WeddingHall... h) {
         this.list.addAll(Arrays.asList(h));
     }
 
+    // Thêm một sảnh nhập từ bàn phím
     @Override
     public void add() {
         WeddingHall h = new WeddingHall();
         h.input();
-        this.list.add(h);
+        // Kiểm tra sảnh đã được thuê hay chưa
+        if (list.contains(h)) {
+            System.out.println("Sorry, the wedding hall is already rented.");
+        } else {
+            this.list.add(h);
+        }
+
     }
 
-    // Xuat danh sach
+    // Xuất danh sách các sảnh
+    @Override
     public void printList() {
         this.list.forEach(h -> h.print());
     }
 
-    // Xoa 
+    // Xóa sảnh 
     public void remove(WeddingHall h) {
         this.list.remove(h);
     }
@@ -60,21 +68,29 @@ public class WeddingHallManagement implements Management{
         this.list.removeIf(s -> s.getName().equals(kw));
     }
 
-
-    // Tim kiem
+    // Tra cứu sảnh theo tên
     public List<WeddingHall> findHall(String kw) {
         return list.stream().filter(h -> h.getName().contains(kw)).collect(Collectors.toList());
     }
 
+    // Tra cứu sảnh theo sức chứa
+    public List<WeddingHall> findHall(int capacity) {
+        return list.stream().filter(h -> h.getCapacity() == capacity).collect(Collectors.toList());
+    }
+
+    // Tra cứu sảnh theo vị trí sảnh
+    public List<WeddingHall> findHallByFloor(int floor) {
+        return list.stream().filter(h -> h.getFloor() == floor).collect(Collectors.toList());
+    }
+
+    // Tính tổng tiền thuê danh sách sảnh
     @Override
     public double priceSum() {
         return this.list.stream().flatMapToDouble(p -> DoubleStream.of(p.calculateRentalPrice())).sum();
     }
 
     // Sap xep danh sach giam dan theo so lan duoc thue
-    
-    
-    // Phương thức cập nhật thông tin sảnh cưới dựa trên id và người dùng nhập liệu mới từ bàn phím
+    // Cập nhật thông tin sảnh dựa trên id
     @Override
     public void upDate(String id) {
         WeddingHall existingWeddingHall = findWeddingHallById(id);
@@ -100,6 +116,7 @@ public class WeddingHallManagement implements Management{
         }
     }
 
+    // Hàm trả về đối tượng cần tìm (Hỗ trợ hàm upDate() )
     private WeddingHall findWeddingHallById(String id) {
         for (WeddingHall weddingHall : list) {
             if (weddingHall.getId().equals(id)) {
@@ -108,33 +125,21 @@ public class WeddingHallManagement implements Management{
         }
         return null;
     }
-  public void docDsHall() throws FileNotFoundException{
-        File f = new File("src/Hall/hall.txt");
-        try(Scanner scan = new Scanner(f)){
-            while(scan.hasNext()){
-                String id = scan.nextLine();
-                String name = scan.nextLine();
-                int floor = scan.nextInt();
-                int ca = scan.nextInt();
-                String date = scan.nextLine();
-                String day = scan.nextLine();
-                String timeofday = scan.nextLine();
-                double price = scan.nextDouble();
-                WeddingHall h = new WeddingHall();
-                this.list.add(h);
-            }
-        }
-    
-    }
+
+    // Ghi file
+    @Override
     public void writeFile(String fileName) {
         IOFile.write(fileName, list);
-        
+
     }
 
+    // Đọc file
+    @Override
     public void readFile(String fileName) {
         IOFile.read(fileName);
-        for(var obj : list){
-                obj.print();
-            }
+        for (var obj : list) {
+            obj.print();
+        }
     }
+
 }

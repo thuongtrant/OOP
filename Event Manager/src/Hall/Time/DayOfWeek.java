@@ -17,6 +17,7 @@ public enum DayOfWeek {
     SATURDAY(20),
     SUNDAY(20);
     private final int dayPrice;
+    
     DayOfWeek(int dayPrice) {
         this.dayPrice = dayPrice;
     }

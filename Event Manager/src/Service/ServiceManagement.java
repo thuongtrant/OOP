@@ -68,31 +68,33 @@ public class ServiceManagement implements Management {
     }
 
     // Xuat danh sach
+    @Override
     public void printList() {
         this.list.forEach(h -> h.print());
     }
 
-    // Xoa 
+    // Xoa dựa theo đối tượng truyền vào
     public void remove(Service h) {
         this.list.remove(h);
     }
-
+    // Xóa dựa theo tên
     @Override
     public void remove(String kw) {
         this.list.removeIf(s -> s.getName().equals(kw));
     }
 
-    // Tim kiem
-    public List<Service> findMenu(String kw) {
+    // Tìm kiếm dựa theo tên
+    public List<Service> findService(String kw) {
         return list.stream().filter(h -> h.getName().contains(kw)).collect(Collectors.toList());
     }
 
-    // Tinh tong dich vu
+    // Tính tổng dịch vụ
     @Override
     public double priceSum() {
         return this.list.stream().flatMapToDouble(p -> DoubleStream.of(p.calculatePrice())).sum();
     }
 
+    // Cập nhật thông tin dựa trên tên 
     @Override
     public void upDate(String id) {
 //        int ID = Integer.parseInt(id);
@@ -124,7 +126,8 @@ public class ServiceManagement implements Management {
         }
 
     }
-
+    
+    // Hàm trả về đối tượng cần tìm (Hỗ trợ hàm upDate() )
     private Service findServiceById(String kw) {
         for (Service m : list) {
             if (m.getName().equalsIgnoreCase(kw)) {

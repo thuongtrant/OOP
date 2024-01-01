@@ -4,12 +4,15 @@
  */
 package Control;
 
+import java.util.List;
+
 /**
  *
  * @author ttthu
  */
 public interface Management {
     void add();
+    void printList();
     void remove(String kw);
     void upDate(String id);
     double priceSum();

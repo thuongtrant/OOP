@@ -28,8 +28,8 @@ public class MenuManagement implements Management {
     public MenuManagement() {
         list = new ArrayList<>();
     }
+    
     // Them 
-
     public void add(MenuItem... m) {
         this.list.addAll(Arrays.asList(m));
     }
@@ -71,6 +71,7 @@ public class MenuManagement implements Management {
     }
 
     // Xuat danh sach
+    @Override
     public void printList() {
         this.list.forEach(h -> h.print());
     }
@@ -119,6 +120,7 @@ public class MenuManagement implements Management {
 
     }
 
+    // Hàm trả về đối tượng cần tìm (Hỗ trợ hàm upDate() )
     private MenuItem findMenuById(String kw) {
         for (MenuItem m : list) {
             if (m.getName().equalsIgnoreCase(kw)) {
@@ -128,7 +130,7 @@ public class MenuManagement implements Management {
         return null;
     }
 
-    // Tim kiem
+    // Tìm kiếm dựa theo tên
     public List<MenuItem> findMenu(String kw) {
         return list.stream().filter(h -> h.getName().contains(kw)).collect(Collectors.toList());
     }

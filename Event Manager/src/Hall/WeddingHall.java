@@ -14,6 +14,7 @@ import java.io.Serializable;
 import Control.IOFile;
 import java.text.ParseException;
 import java.util.InputMismatchException;
+import java.util.Objects;
 //import java.util.zip.DataFormatException;
 
 /**
@@ -22,7 +23,7 @@ import java.util.InputMismatchException;
  */
 public class WeddingHall implements Serializable{
 
-    private static int count = 0;
+    private static int count = 0; // biến đếm ID
     private String id;
     private String name;
     private double price;
@@ -31,7 +32,6 @@ public class WeddingHall implements Serializable{
     private LocalDate dateRental;
     private DayOfWeek dayOfWeek;
     private TimeOfDay timeOfDay;
-    private boolean isAvailable = true;
     private int countRental;
     private final String re = "\\d{2}/\\d{2}/\\d{4}";
 
@@ -52,6 +52,7 @@ public class WeddingHall implements Serializable{
         this.timeOfDay = timeOfDay;
     }
 
+    // Hàm nhập thông tin sảnh
     public void input() {
         System.out.println("Ten: ");
         this.name = Configuration.sc.nextLine();
@@ -90,10 +91,7 @@ public class WeddingHall implements Serializable{
 
     }
 
-    public double calculateRentalPrice() {
-        return dayOfWeek.getDayPrice() * timeOfDay.getTimePrice();
-    }
-
+     // Hàm xuất thông tin sảnh
     public void print() {
         System.out.println("Ma: " + this.id);
         System.out.println("Ten: " + this.name);
@@ -104,15 +102,53 @@ public class WeddingHall implements Serializable{
         System.out.println("Buoi thue: " + this.timeOfDay);
         System.out.println("Gia: " + calculateRentalPrice());
     }
-
-    public void rent() {
-        isAvailable = false;
+    
+    
+    // Hàm tính giá thuê dựa trên ngày và buổi
+    public double calculateRentalPrice() {
+        return dayOfWeek.getDayPrice() * timeOfDay.getTimePrice();
     }
 
-    public void returnHall() {
-        isAvailable = true;
+    // Điều kiện so sánh 2 đối tượng
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 61 * hash + Objects.hashCode(this.name);
+        hash = 61 * hash + this.floor;
+        hash = 61 * hash + Objects.hashCode(this.dateRental);
+        hash = 61 * hash + Objects.hashCode(this.dayOfWeek);
+        hash = 61 * hash + Objects.hashCode(this.timeOfDay);
+        return hash;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final WeddingHall other = (WeddingHall) obj;
+        if (this.floor != other.floor) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateRental, other.dateRental)) {
+            return false;
+        }
+        if (this.dayOfWeek != other.dayOfWeek) {
+            return false;
+        }
+        return this.timeOfDay == other.timeOfDay;
+    }
+    
+    
     public String getName() {
         return name;
     }
@@ -160,15 +196,7 @@ public class WeddingHall implements Serializable{
     public void setTimeOfDay(TimeOfDay timeOfDay) {
         this.timeOfDay = timeOfDay;
     }
-
-    public boolean isIsAvailable() {
-        return isAvailable;
-    }
-
-    public void setIsAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
-    }
-
+    
     public int getCountRental() {
         return countRental;
     }

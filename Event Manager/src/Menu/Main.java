@@ -11,16 +11,19 @@ package Menu;
 public class Main {
 
     public static void main(String[] args) {
-        MenuItem m1 = new Food();
-        MenuItem m2 = new Drink();
+        MenuItem f1 = new Food("Ga nuong", 100,false);
+        MenuItem f2 = new Food("Xoi", 10,true);
+        MenuItem d1 = new Drink("Nuoc khoang", 10,"Aquavina");
+        MenuItem d2 = new Drink("Tra sua", 20, "Koi");
         MenuManagement list = new MenuManagement();
-        m1.input();
-        m2.input();
-        list.add(m1, m2);
-        list.printList();
-        System.out.println("tim kiem");
+        
+        list.add(f1, f2,d1,d2);
+//        list.printList();
+//        System.out.println("tim kiem");
 //        list.findMenu("a").forEach(h -> h.print());
-        list.upDate("ga");
-        list.printList();
+//        list.upDate("ga");
+//        list.printList();
+        list.writeFile("src/Menu/menu.txt");
+        list.readFile("src/Menu/menu.txt");
     }
 }
