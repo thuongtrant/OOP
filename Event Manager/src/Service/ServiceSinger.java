@@ -41,6 +41,8 @@ public class ServiceSinger extends Service {
         } catch (InputMismatchException e) {
             System.err.println("Vui long nhap so!!!");
 
+        } catch(Exception e){
+            System.out.println("Vui long nhap dung dinh dang!");
         }
     }
 

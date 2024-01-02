@@ -55,7 +55,7 @@ public class WeddingHall implements Serializable{
     // Hàm nhập thông tin sảnh
     public void input() {
         System.out.println("Ten: ");
-        this.name = Configuration.sc.nextLine();
+        this.name = Configuration.sc.nextLine().toUpperCase();
         while (true) {
             try {
                 System.out.println("Ngay thue (dd/mm/yyyy): ");
@@ -67,6 +67,9 @@ public class WeddingHall implements Serializable{
                     throw new DateFormatException();
                 }
             } catch (DateFormatException d) {
+                System.out.println("Vui long nhap dung dinh dang");
+            } catch(Exception e){
+                System.out.println("Vui long nhap dung dinh dang");
             }
         }
 
@@ -77,6 +80,8 @@ public class WeddingHall implements Serializable{
             this.timeOfDay = TimeOfDay.valueOf(Configuration.sc.nextLine().toUpperCase());
         } catch (IllegalArgumentException e) {
             System.err.println("Vui long nhap dung !!!");
+        } catch(Exception e){
+            System.out.println("Vui long nhap dung dinh dang!");
         }
 
         try {
@@ -87,6 +92,8 @@ public class WeddingHall implements Serializable{
         } catch (InputMismatchException e) {
             System.err.println("Vui long nhap so!!!");
 
+        } catch(Exception e){
+            System.out.println("Vui long nhap dung dinh dang!");
         }
 
     }

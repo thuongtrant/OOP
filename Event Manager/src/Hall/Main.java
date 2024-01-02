@@ -24,28 +24,32 @@ public class Main {
 
         WeddingHallManagement list = new WeddingHallManagement();
         list.add(w1, w2, w3,w4);
-//        list.printList();
+        list.printList();
+        list.remove("a");
+        System.out.println("Sau khi xoa");
+        list.printList();
 //        list.upDate("S001");
 //        list.printList();
 //        System.out.println("tim");
 //        list.findHall("A").forEach(h -> h.print());
-//        list.writeFile("src/Hall/hall.txt");
-//        list.readFile("src/Hall/hall.txt");
+//list.add();
+//        list.writeFile("src/Hall/hall");
+//        list.readFile("src/Hall/hall");
 //        list.add();
 //        list.printList();
 //        System.out.println("Tra cuu theo nam");
 //        list.findHallByYear(2023).forEach(h -> h.print());
- WeddingHallManagement hallManagement = new WeddingHallManagement();
-
-        // Thêm các sảnh
-        hallManagement.add(new WeddingHall("Hall1", 1, 100, "01/01/2022", DayOfWeek.MONDAY, TimeOfDay.MORNING));
-        hallManagement.add(new WeddingHall("Hall2", 2, 150, "02/01/2022", DayOfWeek.TUESDAY, TimeOfDay.AFTERNOON));
-        hallManagement.add(new WeddingHall("Hall1", 1, 100, "01/01/2022", DayOfWeek.MONDAY, TimeOfDay.MORNING));
-        hallManagement.add(new WeddingHall("Hall1", 3, 200, "04/01/2022", DayOfWeek.THURSDAY, TimeOfDay.MORNING));
-
-        // Sắp xếp danh sách và hiển thị
-        hallManagement.sortHallByRentalCount();
-        hallManagement.printList2();
+// WeddingHallManagement hallManagement = new WeddingHallManagement();
+//
+//        // Thêm các sảnh
+//        hallManagement.add(new WeddingHall("Hall1", 1, 100, "01/01/2022", DayOfWeek.MONDAY, TimeOfDay.MORNING));
+//        hallManagement.add(new WeddingHall("Hall2", 2, 150, "02/01/2022", DayOfWeek.TUESDAY, TimeOfDay.AFTERNOON));
+//        hallManagement.add(new WeddingHall("Hall1", 1, 100, "01/01/2022", DayOfWeek.MONDAY, TimeOfDay.MORNING));
+//        hallManagement.add(new WeddingHall("Hall1", 3, 200, "04/01/2022", DayOfWeek.THURSDAY, TimeOfDay.MORNING));
+//
+//        // Sắp xếp danh sách và hiển thị
+//        hallManagement.sortHallByRentalCount();
+//        hallManagement.printList2();
 
     }
 }

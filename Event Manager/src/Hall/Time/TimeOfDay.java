@@ -15,6 +15,7 @@ public enum TimeOfDay {
     EVENING(25);
     
     private final int timePrice;
+    
     TimeOfDay(int timePrice) {
         this.timePrice = timePrice;
     }

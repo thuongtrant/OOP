@@ -77,10 +77,11 @@ public class ServiceManagement implements Management {
     public void remove(Service h) {
         this.list.remove(h);
     }
+
     // Xóa dựa theo tên
     @Override
     public void remove(String kw) {
-        this.list.removeIf(s -> s.getName().equals(kw));
+        this.list.removeIf(s -> s.getName().contains(kw));
     }
 
     // Tìm kiếm dựa theo tên
@@ -126,7 +127,7 @@ public class ServiceManagement implements Management {
         }
 
     }
-    
+
     // Hàm trả về đối tượng cần tìm (Hỗ trợ hàm upDate() )
     private Service findServiceById(String kw) {
         for (Service m : list) {
@@ -137,6 +138,10 @@ public class ServiceManagement implements Management {
         return null;
     }
 
+    public void setList(List<Service> list) {
+        this.list = list;
+    }
+
     @Override
     public void writeFile(String fileName) {
         IOFile.write(fileName, list);
@@ -144,10 +149,8 @@ public class ServiceManagement implements Management {
 
     @Override
     public void readFile(String fileName) {
-        IOFile.read(fileName);
-        for (var obj : list) {
-            obj.print();
-        }
+        setList(IOFile.read(fileName));
+
     }
 
 }

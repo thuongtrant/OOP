@@ -4,6 +4,7 @@
  */
 package Service;
 
+import Booking.Booking;
 import Hall.Time.*;
 import Hall.*;
 import Menu.*;
@@ -89,24 +90,16 @@ public class Main {
 //        }
 //    }
 
-//        Booking b = new Booking();
-//        //b.input();
-//        //b.print();
-//         try {
-//            b.input();
-//        } catch (InputMismatchException | IllegalArgumentException e) {
-//            System.out.println("WTF: " + e.getMessage());
-//        }
-//         b.print();
+     
 //         
-        Service s = new ServiceKaraoke(3);
-        Service d = new ServiceDecoration();
-        Service k = new ServiceSinger("Lisa", 3);
-        ServiceManagement l = new ServiceManagement();
-        l.add(s, d, k);
-        l.printList();
-        l.upDate("Karaoke");
-        l.printList();
+//        Service s = new ServiceKaraoke(3);
+//        Service d = new ServiceDecoration();
+//        Service k = new ServiceSinger("Lisa", 3);
+//        ServiceManagement l = new ServiceManagement();
+//        l.add(s, d, k);
+//        l.printList();
+//        l.upDate("Karaoke");
+//        l.printList();
 
     }
 

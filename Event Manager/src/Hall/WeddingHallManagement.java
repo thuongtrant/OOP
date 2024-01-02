@@ -68,7 +68,7 @@ public class WeddingHallManagement implements Management {
 
     @Override
     public void remove(String kw) {
-        this.list.removeIf(s -> s.getName().equals(kw));
+        this.list.removeIf(s -> s.getName().contains(kw));
     }
 
     // Tra cứu sảnh theo tên
@@ -128,22 +128,22 @@ public class WeddingHallManagement implements Management {
         return null;
     }
 
+    public void setList(List<WeddingHall> list) {
+        this.list = list;
+    }
+
     // Ghi file
     @Override
     public void writeFile(String fileName) {
-        IOFile.write(fileName, list);
+        IOFile.write(fileName, this.list);
 
     }
 
     // Đọc file
     @Override
     public void readFile(String fileName) {
-        IOFile.read(fileName);
-        for (var obj : list) {
-            obj.print();
-        }
+        setList(IOFile.read(fileName));
     }
-
 
     // Sắp xếp danh sách giảm dần theo tần suất được thuê (xét theo tên sảnh)
     public void sortHallByRentalCount() {
@@ -151,11 +151,11 @@ public class WeddingHallManagement implements Management {
                 .thenComparing(WeddingHall::getName));
     }
 
-    
     // Phương thức tra cứu theo năm
     public List<WeddingHall> findHallByYear(int year) {
         return list.stream()
                 .filter(h -> h.getDateRental().getYear() == year)
                 .collect(Collectors.toList());
     }
+
 }

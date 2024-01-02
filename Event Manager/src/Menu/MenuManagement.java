@@ -28,7 +28,7 @@ public class MenuManagement implements Management {
     public MenuManagement() {
         list = new ArrayList<>();
     }
-    
+
     // Them 
     public void add(MenuItem... m) {
         this.list.addAll(Arrays.asList(m));
@@ -83,7 +83,7 @@ public class MenuManagement implements Management {
 
     @Override
     public void remove(String kw) {
-        this.list.removeIf(s -> s.getName().equals(kw));
+        this.list.removeIf(s -> s.getName().contains(kw));
     }
 
     // Tinh tong dich vu
@@ -135,6 +135,10 @@ public class MenuManagement implements Management {
         return list.stream().filter(h -> h.getName().contains(kw)).collect(Collectors.toList());
     }
 
+    public void setList(List<MenuItem> list) {
+        this.list = list;
+    }
+
     @Override
     public void writeFile(String fileName) {
         IOFile.write(fileName, list);
@@ -142,9 +146,7 @@ public class MenuManagement implements Management {
 
     @Override
     public void readFile(String fileName) {
-        IOFile.read(fileName);
-        for (var obj : list) {
-            obj.print();
-        }
+        setList(IOFile.read(fileName));
+
     }
 }

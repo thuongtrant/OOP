@@ -8,8 +8,8 @@ package Person;
  *
  * @author ttthu
  */
-public class Customer extends Person{
-    
+public class Customer extends Person {
+
     private static int count = 0;
     private int id = count++;
 
@@ -20,7 +20,10 @@ public class Customer extends Person{
     public Customer() {
         super();
     }
-    
-    
-    
+
+    public void print() {
+        System.out.println("ID: " + this.id);
+        super.print();
+    }
+
 }

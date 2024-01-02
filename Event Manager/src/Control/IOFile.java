@@ -18,32 +18,27 @@ import java.util.List;
  */
 public class IOFile {
 
-    public static <T> List<T> read(String fname) {
+    public static <T> List<T> read(String fileName) {
         List<T> list = new ArrayList<>();
         try {
-            ObjectInputStream o = new ObjectInputStream(new FileInputStream(fname));
+            ObjectInputStream o = new ObjectInputStream(new FileInputStream(fileName));
             list = (List<T>) o.readObject();
-//            
             o.close();
         } catch (IOException e) {
             System.out.println(e);
         } catch (ClassNotFoundException e) {
             System.out.println(e);
-
         }
-
         return list;
-
     }
 
-    public static <T> void write(String fname, List<T> arr) {
+    public static <T> void write(String fileName, List<T> arr) {
         try {
-            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(fname));
+            ObjectOutputStream o = new ObjectOutputStream(new FileOutputStream(fileName));
             o.writeObject(arr);
             o.close();
         } catch (IOException e) {
             System.out.println(e);
-
         }
     }
 }
