@@ -15,15 +15,21 @@ public class Main {
         Booking b2 = new Booking();
         Booking b3 = new Booking();
 
-        b1.input();
+//        b1.input();
 //        b2.input();
 //        b3.input();
 //        b1.print();
         BookingManagement list = new BookingManagement();
 
-        list.add(b1);
+//        list.add(b1);
 //        list.printList();
-        list.writeFile("src/Booking/book");
-        list.readFile("src/Booking/book");
+//        list.writeFile("src/Booking/book");
+//        list.readFile("src/Booking/booking");
+//        list.printList();
+        list.add();
+        list.printList();
+        System.out.println("----");
+
+
     }
 }

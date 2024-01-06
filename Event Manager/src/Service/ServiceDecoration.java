@@ -4,11 +4,13 @@
  */
 package Service;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ttthu
  */
-public class ServiceDecoration extends Service {
+public class ServiceDecoration extends Service{
 
     private static int count = 0;
     private final double price = 20;

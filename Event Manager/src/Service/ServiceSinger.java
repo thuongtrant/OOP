@@ -7,12 +7,13 @@ package Service;
 import java.util.List;
 import java.util.InputMismatchException;
 import Control.Configuration;
+import java.io.Serializable;
 
 /**
  *
  * @author ttthu
  */
-public class ServiceSinger extends Service {
+public class ServiceSinger extends Service{
 
     private static int count = 0;
     private int id = count++;

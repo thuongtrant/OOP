@@ -7,6 +7,7 @@ package Service;
 import Control.Configuration;
 import Control.IOFile;
 import Control.Management;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.stream.DoubleStream;
  *
  * @author ttthu
  */
-public class ServiceManagement implements Management {
+public class ServiceManagement implements Management, Serializable {
 
     List<Service> list;
 

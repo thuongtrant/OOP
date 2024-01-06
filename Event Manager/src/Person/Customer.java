@@ -4,6 +4,7 @@
  */
 package Person;
 
+
 /**
  *
  * @author ttthu
@@ -22,7 +23,7 @@ public class Customer extends Person {
     }
 
     public void print() {
-        System.out.println("ID: " + this.id);
+        System.out.println("ID CUSTOMER: " + this.id);
         super.print();
     }
 

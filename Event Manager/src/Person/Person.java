@@ -4,11 +4,12 @@
  */
 package Person;
 import Control.Configuration;
+import java.io.Serializable;
 /**
  *
  * @author ttthu
  */
-public class Person {
+public class Person implements Serializable{
     private String name;
     private String adress;
     private String numberPhone;

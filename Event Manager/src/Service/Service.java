@@ -4,13 +4,14 @@
  */
 package Service;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 /**
  *
  * @author ttthu
  */
-public abstract class Service {
+public abstract class Service implements Serializable{
 
     private String name;
     private int id;

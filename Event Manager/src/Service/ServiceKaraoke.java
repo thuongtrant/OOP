@@ -6,12 +6,13 @@ package Service;
 
 import java.util.InputMismatchException;
 import Control.Configuration;
+import java.io.Serializable;
 
 /**
  *
  * @author ttthu
  */
-public class ServiceKaraoke extends Service {
+public class ServiceKaraoke extends Service{
 
     private int time;
     private final double price = 20;

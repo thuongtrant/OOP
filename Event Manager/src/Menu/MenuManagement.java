@@ -11,6 +11,7 @@ package Menu;
 import Control.Management;
 import Control.Configuration;
 import Control.IOFile;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.stream.DoubleStream;
  *
  * @author ttthu
  */
-public class MenuManagement implements Management {
+public class MenuManagement implements Management,Serializable {
 
     List<MenuItem> list;
 
