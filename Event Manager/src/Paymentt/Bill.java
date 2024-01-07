@@ -3,6 +3,7 @@ package Paymentt;
 import Booking.Booking;
 import Booking.BookingManagement;
 import Control.Configuration;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.OffsetTime;
 
@@ -14,9 +15,10 @@ import java.time.OffsetTime;
  *
  * @author ttthu
  */
-public class Bill {
+public class Bill implements Serializable {
 
     private Booking booking;
+    private Payment p;
     private int idBill;
     private LocalDate ngayTao;
 
@@ -24,26 +26,32 @@ public class Bill {
         this.booking = booking;
     }
 
-//    public void payment() {
-//        System.out.println("Ban muon thanh toan bang hinh thuc nao: ");
-//        System.out.println("1. The");
-//        System.out.println("2. Tien mat");
-//        int choose = Configuration.sc.nextInt();
-//        switch (choose) {
-//            case 1:
-//                Payment card = new Card();
-//                xuatHoaDon();
-//                System.out.println("Gia tong: " + card.totalRentalPrice());
-//                break;
-//            case 2:
-//                Payment cash = new Cash();
-//                xuatHoaDon();
-//                System.out.println("Gia tong: " + cash.totalRentalPrice());
-//            default:
-//                throw new AssertionError();
-//        }
-//
-//    }
+    public void payment() {
+        System.out.println("Ban muon thanh toan bang hinh thuc nao: ");
+        System.out.println("1. The");
+        System.out.println("2. Tien mat");
+        int choose = Configuration.sc.nextInt();
+        // Lấy giá trị của tổng hóa đơn
+        double totalPrice = booking.totalRentalPrice();
+        switch (choose) {
+            case 1:
+                Payment card = new Card();
+                xuatHoaDon();
+                System.out.println("*** Gia can thanh toan: " + card.totalRentalPrice(totalPrice) + "VND ***");
+                System.out.println("===== KET THUC HOA DON =====");
+
+                break;
+            case 2:
+                Payment cash = new Cash();
+                xuatHoaDon();
+                System.out.println("*** Gia can thanh toan: " + cash.totalRentalPrice(totalPrice) + "VND ***");
+                System.out.println("===== KET THUC HOA DON =====");
+
+            default:
+                throw new AssertionError();
+        }
+
+    }
 
     public void xuatHoaDon() {
 
@@ -63,12 +71,11 @@ public class Bill {
 
         System.out.println("--- Thong tin danh sach dich vu ---");
         booking.getListService().printList();
+        System.out.println("*** Gia thue sanh = " + booking.getListHall().priceSum() + "VND ***");
+        System.out.println("*** Gia tong menu = " + booking.getListMenu().priceSum() + "VND ***");
+        System.out.println("*** Gia tong dich vu: " + booking.getListService().priceSum() + "VND ***");
+        System.out.println("*** Gia tong: " + booking.totalRentalPrice() + "VND ***");
 
-        System.out.println("*** Gia tong menu = " + booking.getListMenu().priceSum());
-        System.out.println("*** Gia tong dich vu: " + booking.getListService().priceSum());
-        System.out.println("*** Gia tong: " + booking.totalRentalPrice());
-
-//        System.out.println("===== KET THUC HOA DON =====");
     }
 
     public Booking getBooking() {

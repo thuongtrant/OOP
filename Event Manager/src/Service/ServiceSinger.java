@@ -13,7 +13,7 @@ import java.io.Serializable;
  *
  * @author ttthu
  */
-public class ServiceSinger extends Service{
+public class ServiceSinger extends Service {
 
     private static int count = 0;
     private int id = count++;
@@ -39,10 +39,12 @@ public class ServiceSinger extends Service{
 
             System.out.println("So bai: ");
             this.countSong = Configuration.sc.nextInt();
+            Configuration.sc.nextLine();
+
         } catch (InputMismatchException e) {
             System.err.println("Vui long nhap so!!!");
 
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Vui long nhap dung dinh dang!");
         }
     }

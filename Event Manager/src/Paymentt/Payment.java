@@ -9,9 +9,9 @@ package Paymentt;
  * @author ttthu
  */
 public abstract class Payment {
-
+    
     public Payment() {
     }
      
-//    public abstract double totalRentalPrice1();
+    public abstract double totalRentalPrice(double totalPrice);
 }

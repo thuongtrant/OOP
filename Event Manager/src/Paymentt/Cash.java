@@ -15,9 +15,9 @@ public class Cash extends Payment {
     public Cash() {
     }
 
-//    @Override
-//    public double totalRentalPrice1() {
-//        return totalRentalPrice();
-//    }
+    @Override
+    public double totalRentalPrice(double totalPrice) {
+        return totalPrice;
+    }
 
 }

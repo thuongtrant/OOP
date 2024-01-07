@@ -15,9 +15,9 @@ public class Card extends Payment{
     public Card() {
     }
     
-//    @Override
-//    public double totalRentalPrice1() {
-//        return totalRentalPrice() * 0.5;
-//    }    
-//    
+    @Override
+    public double totalRentalPrice(double totalPrice) {
+        return totalPrice * 0.95;
+    }    
+    
 }

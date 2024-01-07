@@ -30,16 +30,30 @@ import java.util.Map;
 public class Booking implements Serializable {
 
     private LocalDate dateRental;
-    private final String re = "\\d{2}/\\d{2}/\\d{4}";
     private String nameEvent;
-    private CustomerManagement listCustomer = new CustomerManagement();
-    ServiceManagement listService = new ServiceManagement();
-    MenuManagement listMenu = new MenuManagement();
-    WeddingHallManagement listHall = new WeddingHallManagement();
-    Customer customer = new Customer();
-    Bill b = new Bill(this);
+//    private CustomerManagement listCustomer = new CustomerManagement();
+//    private ServiceManagement listService = new ServiceManagement();
+//    private MenuManagement listMenu = new MenuManagement();
+//    private WeddingHallManagement listHall = new WeddingHallManagement();
+//    private Customer customer = new Customer();
+//    private Bill b = new Bill(this);
+    private CustomerManagement listCustomer ;
+    private ServiceManagement listService; 
+    private MenuManagement listMenu ;
+    private WeddingHallManagement listHall ;
+    private Customer customer ;
+    private Bill b ;
+        private final String re = "\\d{2}/\\d{2}/\\d{4}";
+
 
     public Booking() {
+        this.nameEvent = nameEvent;
+        listCustomer = new CustomerManagement();
+        listService = new ServiceManagement();
+        listMenu = new MenuManagement();
+        listHall = new WeddingHallManagement();
+        customer = new Customer();
+        b = new Bill(this);
     }
 
     public void input() {
@@ -80,7 +94,7 @@ public class Booking implements Serializable {
     public double totalRentalPrice() {
         return listMenu.priceSum() + listHall.priceSum() + listService.priceSum();
     }
-
+    
     public String getNameEvent() {
         return nameEvent;
     }
@@ -143,9 +157,13 @@ public class Booking implements Serializable {
     }
 
     public void thueSanh() {
+        // Nhập thông tin khách hàng
         customer.input();
+        System.out.println("Ten bua tiec: ");
+        this.nameEvent = Configuration.sc.nextLine();
         while (true) {
             try {
+                // Nhập ngày đặt thuê
                 System.out.println("Ngay thue (dd/mm/yyyy): ");
                 String dateRental = Configuration.sc.nextLine();
                 if (dateRental.matches(re)) {
@@ -164,7 +182,7 @@ public class Booking implements Serializable {
         do {
             System.out.println("===== MENU =====");
             System.out.println("1. Dat sanh cuoi");
-            System.out.println("2. Dat ly menu");
+            System.out.println("2. Dat menu");
             System.out.println("3. Dat dich vu");
             System.out.println("4. Xuat hoa don thanh toan");
             System.out.println("0. Thoat chuong trinh");
@@ -174,7 +192,7 @@ public class Booking implements Serializable {
                     luaChon = Configuration.sc.nextInt();
                     break;
                 } catch (Exception e) {
-                    System.out.println("Hay nhap tu 0-7");
+                    System.out.println("Hay nhap tu (0-7)");
                 }
             }
             Configuration.sc.nextLine(); // Đọc bỏ ký tự Enter
@@ -194,7 +212,7 @@ public class Booking implements Serializable {
                     break;
                 case 4:
                     // Gọi phương thức cho thuê sảnh cưới
-                    b.xuatHoaDon();
+                    b.payment();
                     break;
                 case 0:
                     System.out.println("Thoat chuong trinh. Cam on ban da su dung.");
@@ -208,6 +226,7 @@ public class Booking implements Serializable {
     private static void quanLySanhCuoiMenu(WeddingHallManagement quanLyNhaHang) {
         boolean exitSubMenu = false;
         while (!exitSubMenu) {
+            System.out.println("::: Menu Hall :::");
             System.out.println("1. Them sanh ");
             System.out.println("2. Cap nhat sanh");
             System.out.println("3. Xoa sanh");
@@ -272,6 +291,7 @@ public class Booking implements Serializable {
     private static void quanLyMenu(MenuManagement quanLyMenu) {
         boolean exitSubMenu = false;
         while (!exitSubMenu) {
+            System.out.println("::: Menu Food :::");
             System.out.println("1. Them menu ");
             System.out.println("2. Cap nhat menu");
             System.out.println("3. Xoa menu");
@@ -280,7 +300,7 @@ public class Booking implements Serializable {
             System.out.println("6. Doc file");
             System.out.println("7. Xem danh sach menu");
             System.out.println("0. Quay lai menu chinh");
-            System.out.println("Moi ban chon (0-7");
+            System.out.println("Moi ban chon (0-7)");
             int choose = Configuration.sc.nextInt();
             Configuration.sc.nextLine();
             switch (choose) {
@@ -323,6 +343,7 @@ public class Booking implements Serializable {
     private static void quanLyDichVu(ServiceManagement quanLyDichVu) {
         boolean exitSubMenu = false;
         while (!exitSubMenu) {
+            System.out.println(" ::: Menu Service ::: ");
             System.out.println("1. Them dich vu ");
             System.out.println("2. Cap nhat dich vu");
             System.out.println("3. Xoa dich vu");
@@ -331,7 +352,7 @@ public class Booking implements Serializable {
             System.out.println("6. Doc file");
             System.out.println("7. Xem danh sach dich vu");
             System.out.println("0. Quay lai menu chinh");
-            System.out.println("Moi ban chon (0-7");
+            System.out.println("Moi ban chon (0-7)");
             int choose = Configuration.sc.nextInt();
             Configuration.sc.nextLine();
             switch (choose) {

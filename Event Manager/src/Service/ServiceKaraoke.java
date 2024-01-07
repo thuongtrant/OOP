@@ -33,6 +33,7 @@ public class ServiceKaraoke extends Service{
         try {
             System.out.println("Thoi gian thue: ");
             this.time = Configuration.sc.nextInt();
+            Configuration.sc.nextLine();
         } catch (InputMismatchException e) {
             System.err.println("Vui long nhap so!");
 

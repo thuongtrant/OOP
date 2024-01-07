@@ -59,7 +59,7 @@ public class Menu {
                     listBooking.writeFile("src/Booking/listBooking");
                     break;
                 case 6:
-                    listBooking.readFile("\"src/Booking/listBooking\"");
+                    listBooking.readFile("src/Booking/listBooking");
                     break;
                 case 7:
                     listBooking.printList();

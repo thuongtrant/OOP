@@ -59,7 +59,7 @@ public class ServiceManagement implements Management, Serializable {
                     list.add(singer);
                     break;
                 default:
-                    System.out.println("Lựa chọn không hợp lệ. Mời nhập lại.");
+                    System.out.println("Lua chon khong hop le. Vui long nhap lai!!!");
                     continue;
             }
 

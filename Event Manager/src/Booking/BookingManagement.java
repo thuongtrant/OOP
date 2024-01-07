@@ -26,7 +26,15 @@ public class BookingManagement {
     private List<Booking> list;
     private double[] revenueByMonth = new double[12];
     private double[] revenueByQuarter = new double[4];
-    
+
+    private double[] revenueByMonthMenu = new double[12];
+    private double[] revenueByQuarterMenu = new double[4];
+
+    private double[] revenueByMonthService = new double[12];
+    private double[] revenueByQuarterService = new double[4];
+
+    private double[] revenueByMonthHall = new double[12];
+    private double[] revenueByQuarterHall = new double[4];
 
     public BookingManagement() {
         list = new ArrayList<>();
@@ -44,7 +52,6 @@ public class BookingManagement {
 //        h.input();
 //        this.list.add(h);
 //    }
-   
     public void add() {
         Booking h = new Booking();
         h.thueSanh();
@@ -52,12 +59,10 @@ public class BookingManagement {
     }
 
     // Xuất danh sách thue sanh
-  
     public void printList() {
         this.list.forEach(h -> h.print());
     }
 
-   
     // Xóa thue 
     public void remove(Booking h) {
         this.list.remove(h);
@@ -73,19 +78,16 @@ public class BookingManagement {
     }
 
     // Ghi file
-    
     public void writeFile(String fileName) {
         IOFile.write(fileName, list);
 
     }
 
     // Đọc file
-    
     public void readFile(String fileName) {
         setList(IOFile.read(fileName));
 
     }
-  
 
     public void setList(List<Booking> list) {
         this.list = list;
@@ -94,31 +96,47 @@ public class BookingManagement {
     public List<Booking> getList() {
         return list;
     }
-     public void reportRevenue() {
+
+    public void reportRevenue() {
         for (Booking booking : list) {
             int month = booking.getDateRental().getMonthValue() - 1;
             int quarter = (month / 3);
 
             double totalRevenue = booking.totalRentalPrice();
+            double totalMenu = booking.getListMenu().priceSum();
+            double totalService = booking.getListService().priceSum();
+            double totalHall = booking.getListHall().priceSum();
 
             revenueByMonth[month] += totalRevenue;
             revenueByQuarter[quarter] += totalRevenue;
+
+            revenueByMonthMenu[month] += totalMenu;
+            revenueByQuarterMenu[quarter] += totalMenu;
+
+            revenueByMonthService[month] += totalService;
+            revenueByQuarterService[quarter] += totalService;
+
+            revenueByMonthHall[month] += totalHall;
+            revenueByQuarterHall[quarter] += totalHall;
         }
     }
 
     public void printRevenueByMonth() {
         System.out.println("Doanh thu theo thang:");
         for (int i = 0; i < revenueByMonth.length; i++) {
-            System.out.println("Thang " + (i + 1) + ": " + revenueByMonth[i] + " VND");
+            System.out.println(String.format("Thang %-3d: Tong doanh thu = %-5s VND | Menu = %-5s VND | Service = %-5s VND | Hall = %-5s VND",
+                i + 1, revenueByMonth[i], revenueByMonthMenu[i], revenueByMonthService[i], revenueByMonthHall[i]));
         }
     }
 
     public void printRevenueByQuarter() {
         System.out.println("Doanh thu theo quy:");
         for (int i = 0; i < revenueByQuarter.length; i++) {
-            System.out.println("Quy " + (i + 1) + ": " + revenueByQuarter[i] + " VND");
+             System.out.println(String.format("Quy %-3d: Tong doanh thu = %-5s VND | Menu = %-5s VND | Service = %-5s VND | Hall = %-5s VND",
+                i + 1, revenueByQuarter[i], revenueByQuarterMenu[i], revenueByQuarterService[i], revenueByQuarterHall[i]));
         }
     }
+
     // Tính tổng số lần thuê cho mỗi sảnh
     private Map<String, Integer> calculateTotalRentalCount() {
         Map<String, Integer> rentalCountMap = new HashMap<>();

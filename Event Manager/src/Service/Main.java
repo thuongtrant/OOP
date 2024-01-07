@@ -95,9 +95,10 @@ public class Main {
 //        Service s = new ServiceKaraoke(3);
 //        Service d = new ServiceDecoration();
 //        Service k = new ServiceSinger("Lisa", 3);
-//        ServiceManagement l = new ServiceManagement();
+        ServiceManagement l = new ServiceManagement();
+        l.add();
 //        l.add(s, d, k);
-//        l.printList();
+        l.printList();
 //        l.upDate("Karaoke");
 //        l.printList();
 
