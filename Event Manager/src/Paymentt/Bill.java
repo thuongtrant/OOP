@@ -18,7 +18,6 @@ import java.time.OffsetTime;
 public class Bill implements Serializable {
 
     private Booking booking;
-    private Payment p;
     private int idBill;
     private LocalDate ngayTao;
 

@@ -158,34 +158,6 @@ public class WeddingHallManagement implements Management, Serializable {
 //                .collect(Collectors.toList());
 //    }
 
-    public void countAndSort() {
-        for (WeddingHall b : list) {
-            String hallName = b.getName();
-            b.increaseCountRental();
-        }
-       Collections.sort(list, new Comparator<WeddingHall>() {
-        @Override
-        public int compare(WeddingHall hall1, WeddingHall hall2) {
-            int frequency1 = hall1.getCountRental();
-            int frequency2 = hall2.getCountRental();
-
-            if (frequency1 == frequency2) {
-                // Nếu số lần thuê bằng nhau, sắp xếp theo tên sảnh
-                return hall1.getName().compareTo(hall2.getName());
-            } else {
-                // Sắp xếp giảm dần theo số lần sảnh được thuê
-                return Integer.compare(frequency2, frequency1);
-            }
-        }
-    });
-          System.out.println("Danh sach giam dan theo tan so thue:");
-           Set<String> printedHalls = new HashSet<>();
-   for (WeddingHall hall : list) {
-        if (!printedHalls.contains(hall.getName())) {
-            System.out.println(hall.getName() + " số lần thuê " + hall.getCountRental()+ " lần");
-            printedHalls.add(hall.getName()); // Đánh dấu sảnh đã được xuất
-        }
-    }
-    }
+    
 
 }

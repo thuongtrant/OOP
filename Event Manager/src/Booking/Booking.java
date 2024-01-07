@@ -31,34 +31,26 @@ public class Booking implements Serializable {
 
     private LocalDate dateRental;
     private String nameEvent;
-//    private CustomerManagement listCustomer = new CustomerManagement();
-//    private ServiceManagement listService = new ServiceManagement();
-//    private MenuManagement listMenu = new MenuManagement();
-//    private WeddingHallManagement listHall = new WeddingHallManagement();
-//    private Customer customer = new Customer();
-//    private Bill b = new Bill(this);
-    private CustomerManagement listCustomer ;
     private ServiceManagement listService; 
     private MenuManagement listMenu ;
     private WeddingHallManagement listHall ;
     private Customer customer ;
-    private Bill b ;
+    private Bill bill ;
         private final String re = "\\d{2}/\\d{2}/\\d{4}";
 
 
     public Booking() {
         this.nameEvent = nameEvent;
-        listCustomer = new CustomerManagement();
         listService = new ServiceManagement();
         listMenu = new MenuManagement();
         listHall = new WeddingHallManagement();
         customer = new Customer();
-        b = new Bill(this);
+        bill = new Bill(this);
     }
 
     public void input() {
         System.out.println("Vui long nhap thong tin cua ban: ");
-        listCustomer.add();
+        customer.input();
 
         System.out.println("Ten bua tiec: ");
         this.nameEvent = Configuration.sc.nextLine();
@@ -75,7 +67,7 @@ public class Booking implements Serializable {
     }
 
     public void print() {
-        listCustomer.prinList();
+        customer.print();
         System.out.println("Name event: " + this.nameEvent);
         listHall.printList();
         listMenu.printList();
@@ -85,10 +77,6 @@ public class Booking implements Serializable {
         System.out.println("Gia tong dich vu");
         System.out.println(listService.priceSum());
         System.out.println("Gia tong: " + totalRentalPrice());
-    }
-
-    public void printSortedHallsByBookings() {
-        listHall.countAndSort();
     }
 
     public double totalRentalPrice() {
@@ -101,14 +89,6 @@ public class Booking implements Serializable {
 
     public void setNameEvent(String nameEvent) {
         this.nameEvent = nameEvent;
-    }
-
-    public CustomerManagement getListCustomer() {
-        return listCustomer;
-    }
-
-    public void setListCustomer(CustomerManagement listCustomer) {
-        this.listCustomer = listCustomer;
     }
 
     public ServiceManagement getListService() {
@@ -147,16 +127,17 @@ public class Booking implements Serializable {
         return dateRental;
     }
 
+    public void setDateRental(LocalDate dateRental) {
+        this.dateRental = dateRental;
+    }
+
+    // Lấy dữ liệu ngày thuê để xuất hóa đơn
     public String dateBooking() {
         String date = this.dateRental.format(DateTimeFormatter.ofPattern(Configuration.DATE_PATTER));
         return date;
     }
 
-    public void setDateRental(LocalDate dateRental) {
-        this.dateRental = dateRental;
-    }
-
-    public void thueSanh() {
+    public void BookingEvent() {
         // Nhập thông tin khách hàng
         customer.input();
         System.out.println("Ten bua tiec: ");
@@ -200,19 +181,19 @@ public class Booking implements Serializable {
             switch (luaChon) {
                 case 1:
                     // Gọi các phương thức quản lý sảnh cưới
-                    quanLySanhCuoiMenu(listHall);
+                    menuHall(listHall);
                     break;
                 case 2:
-                    // Gọi các phương thức quản lý dịch vụ
-                    quanLyMenu(listMenu);
+                    // Gọi các phương thức quản lý thực đơn
+                    menuFood(listMenu);
                     break;
                 case 3:
-                    // Gọi các phương thức quản lý thực đơn
-                    quanLyDichVu(listService);
+                    // Gọi các phương thức quản lý dịch vụ
+                    menuService(listService);
                     break;
                 case 4:
-                    // Gọi phương thức cho thuê sảnh cưới
-                    b.payment();
+                    // Gọi phương thức thanh toán và xuất hóa đon
+                    bill.payment();
                     break;
                 case 0:
                     System.out.println("Thoat chuong trinh. Cam on ban da su dung.");
@@ -223,7 +204,7 @@ public class Booking implements Serializable {
         } while (luaChon != 0);
     }
 
-    private static void quanLySanhCuoiMenu(WeddingHallManagement quanLyNhaHang) {
+    private static void menuHall(WeddingHallManagement menuHall) {
         boolean exitSubMenu = false;
         while (!exitSubMenu) {
             System.out.println("::: Menu Hall :::");
@@ -245,50 +226,50 @@ public class Booking implements Serializable {
                     exitSubMenu = true;
                     break;
                 case 1:
-                    quanLyNhaHang.add();
+                    menuHall.add();
                     break;
                 case 2:
                     System.out.println("Nhap ID sanh muon cap nhat");
                     String upDate = Configuration.sc.nextLine();
-                    quanLyNhaHang.upDate(upDate);
+                    menuHall.upDate(upDate);
                     break;
                 case 3:
                     System.out.println("Nhap ten sanh muon xoa");
                     String remove = Configuration.sc.nextLine().toUpperCase();
-                    quanLyNhaHang.remove(remove);
+                    menuHall.remove(remove);
                     break;
                 case 4:
                     System.out.println("Nhap ten sanh muon tim");
                     String findName = Configuration.sc.nextLine().toUpperCase();
-                    quanLyNhaHang.findHall(findName).forEach(h -> h.print());
+                    menuHall.findHall(findName).forEach(h -> h.print());
                     break;
                 case 5:
                     System.out.println("Nhap suc chua cua sanh muon tim");
                     int capacity = Configuration.sc.nextInt();
-                    quanLyNhaHang.findHall(capacity).forEach(h -> h.print());
+                    menuHall.findHall(capacity).forEach(h -> h.print());
                     break;
                 case 6:
                     System.out.println("Tra cuu sanh theo vi tri");
                     int floor = Configuration.sc.nextInt();
-                    quanLyNhaHang.findHallByFloor(floor).forEach(h -> h.print());
+                    menuHall.findHallByFloor(floor).forEach(h -> h.print());
                     break;
                 case 7:
                     System.out.println("Ghi file");
-                    quanLyNhaHang.writeFile("src/Hall/hall");
+                    menuHall.writeFile("src/Hall/hall");
                     break;
                 case 8:
                     System.out.println("Doc file");
-                    quanLyNhaHang.readFile("src/Hall/hall");
+                    menuHall.readFile("src/Hall/hall");
                     break;
                 case 9:
-                    quanLyNhaHang.printList();
+                    menuHall.printList();
                 default:
                     System.out.println("Lua chon khong hop le. Vui long chon lai!.");
             }
         }
     }
 
-    private static void quanLyMenu(MenuManagement quanLyMenu) {
+    private static void menuFood(MenuManagement menuFood) {
         boolean exitSubMenu = false;
         while (!exitSubMenu) {
             System.out.println("::: Menu Food :::");
@@ -308,39 +289,39 @@ public class Booking implements Serializable {
                     exitSubMenu = true;
                     break;
                 case 1:
-                    quanLyMenu.add();
+                    menuFood.add();
                     break;
                 case 2:
                     System.out.println("Nhap ten menu muon cap nhat");
                     String upDate = Configuration.sc.nextLine();
-                    quanLyMenu.upDate(upDate);
+                    menuFood.upDate(upDate);
                     break;
                 case 3:
                     System.out.println("Nhap ten mon an/thuc uong muon xoa");
                     String remove = Configuration.sc.nextLine();
-                    quanLyMenu.remove(remove);
+                    menuFood.remove(remove);
                     break;
                 case 4:
                     System.out.println("Nhap ten mon an/thuc uong muon tim");
                     String findName = Configuration.sc.nextLine();
-                    quanLyMenu.findMenu(findName).forEach(h -> h.print());
+                    menuFood.findMenu(findName).forEach(h -> h.print());
                     break;
                 case 5:
                     System.out.println("Ghi file");
-                    quanLyMenu.writeFile("src/Menu/menu");
+                    menuFood.writeFile("src/Menu/menu");
                     break;
                 case 6:
                     System.out.println("Doc file");
-                    quanLyMenu.readFile("src/Menu/menu");
+                    menuFood.readFile("src/Menu/menu");
                     break;
                 case 7:
-                    quanLyMenu.printList();
+                    menuFood.printList();
 
             }
         }
     }
 
-    private static void quanLyDichVu(ServiceManagement quanLyDichVu) {
+    private static void menuService(ServiceManagement menuService) {
         boolean exitSubMenu = false;
         while (!exitSubMenu) {
             System.out.println(" ::: Menu Service ::: ");
@@ -360,33 +341,33 @@ public class Booking implements Serializable {
                     exitSubMenu = true;
                     break;
                 case 1:
-                    quanLyDichVu.add();
+                    menuService.add();
                     break;
                 case 2:
                     System.out.println("Nhap ten menu muon cap nhat");
                     String upDate = Configuration.sc.nextLine();
-                    quanLyDichVu.upDate(upDate);
+                    menuService.upDate(upDate);
                     break;
                 case 3:
                     System.out.println("Nhap ten dich vu muon xoa");
                     String remove = Configuration.sc.nextLine();
-                    quanLyDichVu.remove(remove);
+                    menuService.remove(remove);
                     break;
                 case 4:
                     System.out.println("Nhap ten dich vu muon tim");
                     String findName = Configuration.sc.nextLine();
-                    quanLyDichVu.findService(findName).forEach(h -> h.print());
+                    menuService.findService(findName).forEach(h -> h.print());
                     break;
                 case 5:
                     System.out.println("Ghi file");
-                    quanLyDichVu.writeFile("src/Service/service");
+                    menuService.writeFile("src/Service/service");
                     break;
                 case 6:
                     System.out.println("Doc file");
-                    quanLyDichVu.readFile("src/Service/service");
+                    menuService.readFile("src/Service/service");
                     break;
                 case 7:
-                    quanLyDichVu.printList();
+                    menuService.printList();
 
             }
         }

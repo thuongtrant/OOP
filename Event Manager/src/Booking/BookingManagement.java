@@ -45,16 +45,10 @@ public class BookingManagement {
         this.list.addAll(Arrays.asList(h));
     }
 
-    // Thêm một sảnh nhập từ bàn phím
-//    @Override
-//    public void add() {
-//        Booking h = new Booking();
-//        h.input();
-//        this.list.add(h);
-//    }
+    
     public void add() {
         Booking h = new Booking();
-        h.thueSanh();
+        h.BookingEvent();
         this.list.add(h);
     }
 

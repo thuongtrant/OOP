@@ -12,9 +12,6 @@ import Booking.Booking;
  */
 public class Cash extends Payment {
 
-    public Cash() {
-    }
-
     @Override
     public double totalRentalPrice(double totalPrice) {
         return totalPrice;
