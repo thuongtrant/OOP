@@ -32,8 +32,6 @@ public class WeddingHall implements Serializable {
     private DayOfWeek dayOfWeek;
     private TimeOfDay timeOfDay;
     private int countRental;
-//    private LocalDate dateRental;
-//    private final String re = "\\d{2}/\\d{2}/\\d{4}";
 
     {
         this.id = String.format("S%03d", count++);
@@ -47,7 +45,6 @@ public class WeddingHall implements Serializable {
         this.price = price;
         this.floor = floor;
         this.capacity = capacity;
-//        this.dateRental = LocalDate.parse(dateRental, DateTimeFormatter.ofPattern(Configuration.DATE_PATTER));
         this.dayOfWeek = dayOfWeek;
         this.timeOfDay = timeOfDay;
     }
@@ -56,22 +53,6 @@ public class WeddingHall implements Serializable {
     public void input() {
         System.out.println("Ten: ");
         this.name = Configuration.sc.nextLine().toUpperCase();
-//        while (true) {
-//            try {
-//                System.out.println("Ngay thue (dd/mm/yyyy): ");
-//                String dateRental = Configuration.sc.nextLine();
-//                if (dateRental.matches(re)) {
-//                    this.dateRental = LocalDate.parse(dateRental, DateTimeFormatter.ofPattern(Configuration.DATE_PATTER));
-//                    break;
-//                } else {
-//                    throw new DateFormatException();
-//                }
-//            } catch (DateFormatException d) {
-//                System.out.println("Vui long nhap dung dinh dang");
-//            } catch (Exception e) {
-//                System.out.println("Vui long nhap dung dinh dang");
-//            }
-//        }
         while(true){
         try {
             System.out.println("Enter day of week (MONDAY, TUESDAY, etc.): ");
@@ -101,7 +82,6 @@ public class WeddingHall implements Serializable {
         System.out.println("Ten: " + this.name);
         System.out.println("Tang: " + this.floor);
         System.out.println("Suc chua: " + this.capacity);
-//        System.out.printf("Ngay thue: %s\n", this.dateRental.format(DateTimeFormatter.ofPattern(Configuration.DATE_PATTER)));
         System.out.println("Ngay thue: " + this.dayOfWeek);
         System.out.println("Buoi thue: " + this.timeOfDay);
         System.out.println("Gia: " + calculateRentalPrice());
@@ -118,7 +98,6 @@ public class WeddingHall implements Serializable {
         int hash = 5;
         hash = 61 * hash + Objects.hashCode(this.name);
         hash = 61 * hash + this.floor;
-//        hash = 61 * hash + Objects.hashCode(this.dateRental);
         hash = 61 * hash + Objects.hashCode(this.dayOfWeek);
         hash = 61 * hash + Objects.hashCode(this.timeOfDay);
         return hash;
@@ -142,9 +121,6 @@ public class WeddingHall implements Serializable {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-//        if (!Objects.equals(this.dateRental, other.dateRental)) {
-//            return false;
-//        }
         if (this.dayOfWeek != other.dayOfWeek) {
             return false;
         }
@@ -209,14 +185,6 @@ public class WeddingHall implements Serializable {
     public void setCountRental(int countRental) {
         this.countRental = countRental;
     }
-
-//    public LocalDate getDateRental() {
-//        return dateRental;
-//    }
-//
-//    public void setDateRental(LocalDate dateRental) {
-//        this.dateRental = dateRental;
-//    }
 
     public String getId() {
         return id;

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
 
 /**
  *
@@ -24,44 +25,25 @@ import java.util.stream.DoubleStream;
 public class BookingManagement {
 
     private List<Booking> list;
-    private double[] revenueByMonth = new double[12];
-    private double[] revenueByQuarter = new double[4];
-
-    private double[] revenueByMonthMenu = new double[12];
-    private double[] revenueByQuarterMenu = new double[4];
-
-    private double[] revenueByMonthService = new double[12];
-    private double[] revenueByQuarterService = new double[4];
-
-    private double[] revenueByMonthHall = new double[12];
-    private double[] revenueByQuarterHall = new double[4];
+    
 
     public BookingManagement() {
         list = new ArrayList<>();
     }
-
-    // Thêm nhiều sảnh 
-    public void add(Booking... h) {
-        this.list.addAll(Arrays.asList(h));
-    }
-
     
+    //Thêm sảnh
     public void add() {
         Booking h = new Booking();
         h.BookingEvent();
         this.list.add(h);
     }
 
-    // Xuất danh sách thue sanh
+    // Xuất danh sách đặt tiệc
     public void printList() {
         this.list.forEach(h -> h.print());
     }
 
-    // Xóa thue 
-    public void remove(Booking h) {
-        this.list.remove(h);
-    }
-
+    // Xóa đặt tiệc 
     public void remove(String kw) {
         this.list.removeIf(s -> s.getNameEvent().contains(kw));
     }
@@ -91,46 +73,7 @@ public class BookingManagement {
         return list;
     }
 
-    public void reportRevenue() {
-        for (Booking booking : list) {
-            int month = booking.getDateRental().getMonthValue() - 1;
-            int quarter = (month / 3);
-
-            double totalRevenue = booking.totalRentalPrice();
-            double totalMenu = booking.getListMenu().priceSum();
-            double totalService = booking.getListService().priceSum();
-            double totalHall = booking.getListHall().priceSum();
-
-            revenueByMonth[month] += totalRevenue;
-            revenueByQuarter[quarter] += totalRevenue;
-
-            revenueByMonthMenu[month] += totalMenu;
-            revenueByQuarterMenu[quarter] += totalMenu;
-
-            revenueByMonthService[month] += totalService;
-            revenueByQuarterService[quarter] += totalService;
-
-            revenueByMonthHall[month] += totalHall;
-            revenueByQuarterHall[quarter] += totalHall;
-        }
-    }
-
-    public void printRevenueByMonth() {
-        System.out.println("Doanh thu theo thang:");
-        for (int i = 0; i < revenueByMonth.length; i++) {
-            System.out.println(String.format("Thang %-3d: Tong doanh thu = %-5s VND | Menu = %-5s VND | Service = %-5s VND | Hall = %-5s VND",
-                i + 1, revenueByMonth[i], revenueByMonthMenu[i], revenueByMonthService[i], revenueByMonthHall[i]));
-        }
-    }
-
-    public void printRevenueByQuarter() {
-        System.out.println("Doanh thu theo quy:");
-        for (int i = 0; i < revenueByQuarter.length; i++) {
-             System.out.println(String.format("Quy %-3d: Tong doanh thu = %-5s VND | Menu = %-5s VND | Service = %-5s VND | Hall = %-5s VND",
-                i + 1, revenueByQuarter[i], revenueByQuarterMenu[i], revenueByQuarterService[i], revenueByQuarterHall[i]));
-        }
-    }
-
+   
     // Tính tổng số lần thuê cho mỗi sảnh
     private Map<String, Integer> calculateTotalRentalCount() {
         Map<String, Integer> rentalCountMap = new HashMap<>();
@@ -161,5 +104,39 @@ public class BookingManagement {
                 && booking.getDateRental().getYear() == year)))
                 .forEach(entry -> System.out.println("Sanh " + entry.getKey() + ", so lan thue: " + entry.getValue()));
     }
+    
+   
+    
+ public void reportRevenueByMonth() {
+        // Calculate revenue by month
+        System.out.println("Revenue by Month:");
+        IntStream.range(1, 13)
+                .mapToObj(month -> {
+                    List<Booking> bookings = list.stream()
+                            .filter(booking -> booking.getDateRental().getMonthValue() == month)
+                            .collect(Collectors.toList());
+                    double totalRevenue = bookings.stream()
+                            .mapToDouble(Booking::totalRentalPrice)
+                            .sum();
+                    return "Thang: " + totalRevenue;
+                })
+                .forEach(System.out::println);
 
+        
+    }
+ public void reportRevenueByQuarter(){
+ // Calculate revenue by quarter
+        System.out.println("Revenue by Quarter:");
+        IntStream.range(1, 5)
+                .mapToObj(quarter -> {
+                    List<Booking> bookings = list.stream()
+                            .filter(booking -> (booking.getDateRental().getMonthValue() - 1) / 3 + 1 == quarter)
+                            .collect(Collectors.toList());
+                    double totalRevenue = bookings.stream()
+                            .mapToDouble(Booking::totalRentalPrice)
+                            .sum();
+                    return "Quy %-3d:" + quarter + ": " + totalRevenue;
+                })
+                .forEach(System.out::println);
+ }
 }

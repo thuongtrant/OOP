@@ -34,7 +34,7 @@ public class Booking implements Serializable {
     private ServiceManagement listService; 
     private MenuManagement listMenu ;
     private WeddingHallManagement listHall ;
-    private Customer customer ;
+    private Person customer ;
     private Bill bill ;
         private final String re = "\\d{2}/\\d{2}/\\d{4}";
 
@@ -115,7 +115,7 @@ public class Booking implements Serializable {
         this.listHall = listHall;
     }
 
-    public Customer getCustomer() {
+    public Person getCustomer() {
         return customer;
     }
 

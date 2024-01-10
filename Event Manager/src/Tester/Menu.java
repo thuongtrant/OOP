@@ -39,7 +39,8 @@ public class Menu {
                     System.out.println("Hay nhap tu 0-7");
                 }
             }
-            Configuration.sc.nextLine(); // Đọc bỏ ký tự Enter
+            Configuration.sc.nextLine(); // Đọc bỏ ký tự Enter6
+            
 
             switch (luaChon) {
                 case 1:
@@ -49,11 +50,10 @@ public class Menu {
                     listBooking.printRentalCount();
                     break;
                 case 3:
-                    listBooking.reportRevenue();
-                    listBooking.printRevenueByMonth();
+                    listBooking.reportRevenueByMonth();
                     break;
                 case 4:
-                    listBooking.printRevenueByQuarter();
+                    listBooking.reportRevenueByQuarter();
                     break;
                 case 5:
                     listBooking.writeFile("src/Booking/listBooking");

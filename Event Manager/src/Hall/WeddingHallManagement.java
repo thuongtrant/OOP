@@ -79,6 +79,7 @@ public class WeddingHallManagement implements Management, Serializable {
     // Tra cứu sảnh theo tên
     public List<WeddingHall> findHall(String kw) {
         return list.stream().filter(h -> h.getName().contains(kw)).collect(Collectors.toList());
+        
     }
 
     // Tra cứu sảnh theo sức chứa
@@ -114,7 +115,6 @@ public class WeddingHallManagement implements Management, Serializable {
             existingWeddingHall.setName(updatedWeddingHall.getName());
             existingWeddingHall.setFloor(updatedWeddingHall.getFloor());
             existingWeddingHall.setCapacity(updatedWeddingHall.getCapacity());
-//            existingWeddingHall.setDateRental(updatedWeddingHall.getDateRental());
             existingWeddingHall.setDayOfWeek(updatedWeddingHall.getDayOfWeek());
             existingWeddingHall.setTimeOfDay(updatedWeddingHall.getTimeOfDay());
 
@@ -150,13 +150,6 @@ public class WeddingHallManagement implements Management, Serializable {
         setList(IOFile.read(fileName));
     }
 
-    // Sắp xếp danh sách giảm dần theo tần suất được thuê (xét theo tên sảnh)
-    // Phương thức tra cứu theo năm
-//    public List<WeddingHall> findHallByYear(int year) {
-//        return list.stream()
-//                .filter(h -> h.getDateRental().getYear() == year)
-//                .collect(Collectors.toList());
-//    }
 
     
 

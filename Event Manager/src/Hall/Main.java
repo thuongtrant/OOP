@@ -25,6 +25,8 @@ public class Main {
         WeddingHallManagement list = new WeddingHallManagement();
         list.add(w1, w2, w3,w4);
         list.printList();
+        String kw = Control.Configuration.sc.nextLine();
+        
 //        list.remove("a");
 //        System.out.println("Sau khi xoa");
 //        list.printList();
