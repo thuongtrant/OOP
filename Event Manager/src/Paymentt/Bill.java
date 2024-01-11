@@ -45,9 +45,9 @@ public class Bill implements Serializable {
                 xuatHoaDon();
                 System.out.println("*** Gia can thanh toan: " + cash.totalRentalPrice(totalPrice) + "VND ***");
                 System.out.println("===== KET THUC HOA DON =====");
-
+                break;
             default:
-                throw new AssertionError();
+                System.err.println("Ban da nhap sai!");
         }
 
     }
@@ -57,18 +57,18 @@ public class Bill implements Serializable {
         System.out.println("===== HOA DON =====");
         System.out.println("ID BILL : " + this.idBill);
         System.out.println("Ngay tao: " + ngayTao.now());
-        System.out.println("--- Thong tin khach hang ---");
+//        System.out.println("--- Thong tin khach hang ---");
         booking.getCustomer().print();
         System.out.println("Ngay thue: " + booking.dateBooking());
         System.out.println("Ten bua tiec: " + booking.getNameEvent());
 
-        System.out.println("--- Thong tin sanh thue ---");
+//        System.out.println("--- Thong tin sanh thue ---");
         booking.getListHall().printList();
 
-        System.out.println("--- Thong tin danh sach menu ---");
+//        System.out.println("--- Thong tin danh sach menu ---");
         booking.getListMenu().printList();
 
-        System.out.println("--- Thong tin danh sach dich vu ---");
+//        System.out.println("--- Thong tin danh sach dich vu ---");
         booking.getListService().printList();
         System.out.println("*** Gia thue sanh = " + booking.getListHall().priceSum() + "VND ***");
         System.out.println("*** Gia tong menu = " + booking.getListMenu().priceSum() + "VND ***");

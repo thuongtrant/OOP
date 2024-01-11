@@ -57,7 +57,6 @@ public class Person implements Serializable{
         this.numberPhone = Configuration.sc.nextLine();
     }
     public void print(){
-        System.out.println("Thong tin khach hang: ");
         System.out.println("Ten: " +  this.name);
         System.out.println("Dia chi: " +  this.adress);
         System.out.println("So dien thoai: " +  this.numberPhone);

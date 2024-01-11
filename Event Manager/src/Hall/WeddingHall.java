@@ -31,7 +31,7 @@ public class WeddingHall implements Serializable {
     private int capacity;
     private DayOfWeek dayOfWeek;
     private TimeOfDay timeOfDay;
-    private int countRental;
+    private int countRental = 1;
 
     {
         this.id = String.format("S%03d", count++);
@@ -51,33 +51,35 @@ public class WeddingHall implements Serializable {
 
     // Hàm nhập thông tin sảnh
     public void input() {
+        System.out.println("Nhap Thong Tin Sanh: ");
         System.out.println("Ten: ");
         this.name = Configuration.sc.nextLine().toUpperCase();
-        while(true){
-        try {
-            System.out.println("Enter day of week (MONDAY, TUESDAY, etc.): ");
-            this.dayOfWeek = DayOfWeek.valueOf(Configuration.sc.nextLine().toUpperCase());
-            System.out.println("Enter time of day (MORNING, AFTERNOON, EVENING): ");
-            this.timeOfDay = TimeOfDay.valueOf(Configuration.sc.nextLine().toUpperCase());
-            System.out.println("Tang: ");
-            this.floor = Configuration.sc.nextInt();
-            System.out.println("Suc chua: ");
-            this.capacity = Configuration.sc.nextInt();
-            break;
-        } catch (IllegalArgumentException e) {
-            System.err.println("Vui long nhap dung !!!");
-        }catch (InputMismatchException e) {
-            System.err.println("Vui long nhap so!!!");
-        } catch (Exception e) {
-            System.out.println("Vui long nhap dung dinh dang!");
-        }
+        while (true) {
+            try {
+                System.out.println("Nhap ngay trong tuan (MONDAY, TUESDAY, etc.): ");
+                this.dayOfWeek = DayOfWeek.valueOf(Configuration.sc.nextLine().toUpperCase());
+                System.out.println("Nhap buoi trong ngay (MORNING, AFTERNOON, EVENING): ");
+                this.timeOfDay = TimeOfDay.valueOf(Configuration.sc.nextLine().toUpperCase());
+                System.out.println("Tang: ");
+                this.floor = Configuration.sc.nextInt();
+                System.out.println("Suc chua: ");
+                this.capacity = Configuration.sc.nextInt();
+                break;
+            } catch (IllegalArgumentException e) {
+                System.err.println("Vui long nhap dung !!!");
+            } catch (InputMismatchException e) {
+                System.err.println("Vui long nhap so!!!");
+            } catch (Exception e) {
+                System.out.println("Vui long nhap dung dinh dang!");
+            }
 
-        }  
+        }
 
     }
 
     // Hàm xuất thông tin sảnh
     public void print() {
+        System.out.println(" --- Thong Tin Sanh Thue --- ");
         System.out.println("Ma: " + this.id);
         System.out.println("Ten: " + this.name);
         System.out.println("Tang: " + this.floor);
@@ -85,6 +87,11 @@ public class WeddingHall implements Serializable {
         System.out.println("Ngay thue: " + this.dayOfWeek);
         System.out.println("Buoi thue: " + this.timeOfDay);
         System.out.println("Gia: " + calculateRentalPrice());
+    }
+
+    public void printForCountRental() {
+        System.out.println("Ten: " + this.name);
+        System.out.println("Duoc thue: " + this.countRental);
     }
 
     // Hàm tính giá thuê dựa trên ngày và buổi
@@ -127,9 +134,10 @@ public class WeddingHall implements Serializable {
         return this.timeOfDay == other.timeOfDay;
     }
 
-    public void increaseCountRental(){
-    countRental++;
+    public int increaseCountRental() {
+        return countRental++;
     }
+
     public String getName() {
         return name;
     }
@@ -193,5 +201,5 @@ public class WeddingHall implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
-   
+
 }

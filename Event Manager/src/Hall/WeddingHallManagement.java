@@ -49,7 +49,7 @@ public class WeddingHallManagement implements Management, Serializable {
         h.input();
         // Kiểm tra sảnh đã được thuê hay chưa
         if (list.contains(h)) {
-            System.out.println("Sorry, the wedding hall is already rented.");
+            System.out.println("Xin loi! Sanh nay da duoc thue.");
         } else {
             this.list.add(h);
         }

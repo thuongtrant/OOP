@@ -12,8 +12,11 @@ package Person;
 public class Customer extends Person {
 
     private static int count = 0;
-    private int id = count++;
+    private int id;
 
+    {
+        this.id = count++;
+    }
     public Customer(String name, String adress, String numberPhone) {
         super(name, adress, numberPhone);
     }
@@ -23,6 +26,7 @@ public class Customer extends Person {
     }
 
     public void print() {
+        System.out.println(" --- Thong Tin Khach Hang ---");
         System.out.println("ID CUSTOMER: " + this.id);
         super.print();
     }

@@ -67,6 +67,7 @@ public class Booking implements Serializable {
     }
 
     public void print() {
+        System.out.println(" ***** Thong Tin Dat Tiec ***** ");
         customer.print();
         System.out.println("Name event: " + this.nameEvent);
         listHall.printList();
@@ -137,7 +138,7 @@ public class Booking implements Serializable {
         return date;
     }
 
-    public void BookingEvent() {
+    public void bookingEvent() {
         // Nhập thông tin khách hàng
         customer.input();
         System.out.println("Ten bua tiec: ");
@@ -181,15 +182,15 @@ public class Booking implements Serializable {
             switch (luaChon) {
                 case 1:
                     // Gọi các phương thức quản lý sảnh cưới
-                    menuHall(listHall);
+                    bookingHall(listHall);
                     break;
                 case 2:
                     // Gọi các phương thức quản lý thực đơn
-                    menuFood(listMenu);
+                    bookingFood(listMenu);
                     break;
                 case 3:
                     // Gọi các phương thức quản lý dịch vụ
-                    menuService(listService);
+                    bookingService(listService);
                     break;
                 case 4:
                     // Gọi phương thức thanh toán và xuất hóa đon
@@ -204,7 +205,7 @@ public class Booking implements Serializable {
         } while (luaChon != 0);
     }
 
-    private static void menuHall(WeddingHallManagement menuHall) {
+    private static void bookingHall(WeddingHallManagement menuHall) {
         boolean exitSubMenu = false;
         while (!exitSubMenu) {
             System.out.println("::: Menu Hall :::");
@@ -263,13 +264,14 @@ public class Booking implements Serializable {
                     break;
                 case 9:
                     menuHall.printList();
+                    break;
                 default:
                     System.out.println("Lua chon khong hop le. Vui long chon lai!.");
             }
         }
     }
 
-    private static void menuFood(MenuManagement menuFood) {
+    private static void bookingFood(MenuManagement menuFood) {
         boolean exitSubMenu = false;
         while (!exitSubMenu) {
             System.out.println("::: Menu Food :::");
@@ -316,12 +318,12 @@ public class Booking implements Serializable {
                     break;
                 case 7:
                     menuFood.printList();
-
+                    break;
             }
         }
     }
 
-    private static void menuService(ServiceManagement menuService) {
+    private static void bookingService(ServiceManagement menuService) {
         boolean exitSubMenu = false;
         while (!exitSubMenu) {
             System.out.println(" ::: Menu Service ::: ");
@@ -368,7 +370,7 @@ public class Booking implements Serializable {
                     break;
                 case 7:
                     menuService.printList();
-
+                    break;
             }
         }
     }

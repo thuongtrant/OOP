@@ -35,6 +35,8 @@ public class Drink extends MenuItem {
 
     @Override
     public void print() {
+        System.out.println(" --- Thong Tin Menu Thuc Uong ---");
+
         System.out.println("ID: " + this.id);
         super.print();
         System.out.println("Hang san xuat: " + this.manufacturer);

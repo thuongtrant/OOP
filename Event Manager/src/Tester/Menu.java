@@ -21,14 +21,15 @@ public class Menu {
         int luaChon;
 
         do {
-            System.out.println("===== MENU =====");
+            System.out.println("\n===== MENU =====");
             System.out.println("1. Dat tiec");
             System.out.println("2. Sap xep danh sach thue sanh");
-            System.out.println("3. Bao cao doanh thu theo thang");
-            System.out.println("4. Bao cao doanh thu theo quy");
-            System.out.println("5. Ghi file");
-            System.out.println("6. Doc file");
-            System.out.println("7. Xuat danh sach da dat");
+            System.out.println("3. Sap xep danh sach thue sanh (Tra cuu theo nam)");
+            System.out.println("4. Bao cao doanh thu theo thang");
+            System.out.println("5. Bao cao doanh thu theo quy");
+            System.out.println("6. Ghi file");
+            System.out.println("7. Doc file");
+            System.out.println("8. Xuat danh sach da dat");
             System.out.println("0. Thoat chuong trinh");
             System.out.print("Nhap lua chon :");
             while (true) {
@@ -40,28 +41,37 @@ public class Menu {
                 }
             }
             Configuration.sc.nextLine(); // Đọc bỏ ký tự Enter6
-            
 
             switch (luaChon) {
                 case 1:
                     listBooking.add();
                     break;
                 case 2:
-                    listBooking.printRentalCount();
+                    System.out.println("\n ::: SAP XEP DANH SACH THUE SANH :::");
+                    listBooking.sortHallByRentalCount();
                     break;
                 case 3:
-                    listBooking.reportRevenueByMonth();
+                    System.out.println("Nhap nam muon tra cuu: ");
+                    int year = Configuration.sc.nextInt();
+                    listBooking.sortHallByRentalCount(year);
                     break;
                 case 4:
-                    listBooking.reportRevenueByQuarter();
+                    System.out.println("\n ::: TONG KE THEO THANG :::");
+                    listBooking.reportRevenueByMonth();
                     break;
                 case 5:
-                    listBooking.writeFile("src/Booking/listBooking");
+                    System.out.println("\n ::: THONG KE THEO QUY ::: ");
+                    listBooking.reportRevenueByQuarter();
                     break;
                 case 6:
-                    listBooking.readFile("src/Booking/listBooking");
+                    listBooking.writeFile("src/Booking/listBooking");
+                    System.out.println("Ghi file thanh cong");
                     break;
                 case 7:
+                    listBooking.readFile("src/Booking/listBooking");
+                    break;
+                case 8:
+                    System.out.println("\n ::: DANH SACH BOOKING ::: ");
                     listBooking.printList();
                     break;
                 case 0:

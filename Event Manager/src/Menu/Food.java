@@ -23,7 +23,7 @@ public class Food extends MenuItem {
         super(name, price);
     }
 
-    public Food(String name, double price,boolean isVegetarian) {
+    public Food(String name, double price, boolean isVegetarian) {
         super(name, price);
         this.isVegetarian = isVegetarian;
     }
@@ -46,26 +46,26 @@ public class Food extends MenuItem {
 
     @Override
     public void print() {
+        System.out.println(" --- Thong Tin Menu Thuc An ---");
         System.out.println("ID: " + id);
         super.print();
         System.out.println("Trang thai thuc an: " + (isVegetarian ? "Chay" : "Man"));
     }
-    
+
     public boolean isVegetarian() {
         System.out.println("Mon ban chon an chay duoc khong (Y/N)");
         String kw = Configuration.sc.nextLine();
         if (kw.equalsIgnoreCase("Y")) {
-            return isVegetarian = false;
+            return isVegetarian = true;
         }
-        return isVegetarian = true;
+        return isVegetarian = false;
     }
 
     public void setIsVegetarian(boolean isVegetarian) {
         this.isVegetarian = isVegetarian;
     }
-    
-    
-      public int getId() {
+
+    public int getId() {
         return id;
     }
 

@@ -5,6 +5,7 @@
 package Menu;
 
 import Control.Configuration;
+import java.awt.BorderLayout;
 import java.io.Serializable;
 
 /**
@@ -24,6 +25,7 @@ public abstract class MenuItem implements Serializable{
     }
     
     public void input(){
+        System.out.println("Nhap Thong Tin Menu: ");
         System.out.println("Ten: ");
         this.name = Configuration.sc.nextLine();
         System.out.println("Gia: ");

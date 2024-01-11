@@ -23,7 +23,7 @@ public abstract class Service implements Serializable{
     
     public abstract double calculatePrice(); 
     public void input(){
-    
+        System.out.println(" --- Nhap Thong Tin Dich Vu ---");
     }
 
     public void print(){
