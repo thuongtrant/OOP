@@ -40,7 +40,7 @@ public class Menu {
                     System.out.println("Hay nhap tu 0-7");
                 }
             }
-            Configuration.sc.nextLine(); // Đọc bỏ ký tự Enter6
+            Configuration.sc.nextLine(); 
 
             switch (luaChon) {
                 case 1:

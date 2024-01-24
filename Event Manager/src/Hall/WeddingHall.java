@@ -31,7 +31,7 @@ public class WeddingHall implements Serializable {
     private int capacity;
     private DayOfWeek dayOfWeek;
     private TimeOfDay timeOfDay;
-    private int countRental = 1;
+    private int countRental;
 
     {
         this.id = String.format("S%03d", count++);

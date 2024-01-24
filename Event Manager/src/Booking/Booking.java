@@ -36,7 +36,7 @@ public class Booking implements Serializable {
     private WeddingHallManagement listHall ;
     private Person customer ;
     private Bill bill ;
-        private final String re = "\\d{2}/\\d{2}/\\d{4}";
+    private final String re = "\\d{2}/\\d{2}/\\d{4}";
 
 
     public Booking() {
@@ -69,6 +69,7 @@ public class Booking implements Serializable {
     public void print() {
         System.out.println(" ***** Thong Tin Dat Tiec ***** ");
         customer.print();
+        System.out.println("Ngay thue: " + this.dateRental);
         System.out.println("Name event: " + this.nameEvent);
         listHall.printList();
         listMenu.printList();

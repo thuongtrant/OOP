@@ -25,6 +25,7 @@ public class Test {
         rentalSystem.addCar(car3);
 
         rentalSystem.menu();
+        
     }
     
 }
